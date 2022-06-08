@@ -1,5 +1,5 @@
 import React from "react"
-import Modell from "../model/Shopping"
+import Modell from "../model/Repertoire"
 
 class GruppeBearbeitenTag extends React.Component {
   constructor (props) {

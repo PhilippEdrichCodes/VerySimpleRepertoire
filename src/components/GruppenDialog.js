@@ -1,5 +1,5 @@
 import React from "react"
-import Modell from "../model/Shopping"
+import Modell from "../model/Repertoire"
 import GruppeBearbeitenTag from "./GruppeBearbeitenTag"
 
 class GruppenDialog extends React.Component {

@@ -1,5 +1,5 @@
 import Artikel from "./Artikel.js"
-import Modell from "./Shopping.js"
+import Modell from "./Repertoire.js"
 
 /**
  * Klasse zum Gruppieren der Artikel

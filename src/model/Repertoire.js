@@ -7,7 +7,7 @@ import Gruppe from "./Gruppe.js"
  * @property {Gruppe}   aktiveGruppe      - enthält die aktuell ausgewählte Gruppe
  * @property {boolean}  meldungenAusgeben - steuert, ob eine Meldung ausgegeben werden soll oder nicht
  */
-class Shopping {
+class Repertoire {
   gruppenListe = []
   aktiveGruppe = null
   meldungenAusgeben = true
@@ -207,6 +207,6 @@ class Shopping {
   }
 }
 
-const Modell = new Shopping()
+const Modell = new Repertoire()
 
 export default Modell

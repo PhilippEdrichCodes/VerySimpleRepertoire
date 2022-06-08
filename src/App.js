@@ -1,5 +1,5 @@
 import React from "react"
-import Modell from "./model/Shopping"
+import Modell from "./model/Repertoire"
 import GruppenTag from "./components/GruppenTag"
 import GruppenDialog from "./components/GruppenDialog"
 import SortierDialog from "./components/SortierDialog"
