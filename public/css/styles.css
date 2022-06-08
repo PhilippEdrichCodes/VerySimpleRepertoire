@@ -1,19 +1,19 @@
 #root {
-  margin: 0;
-  padding: 0;
+  background-attachment: fixed;
+  background-image:      url("../img/noten_small_640x853.jpg");
 
   /* size */
-  width: 23rem;
+  background-position:   center center;
 
   /* shape */
-  border-radius: 0.5rem;
+  background-repeat:     no-repeat;
 
   /* background */
-  background-image: url("../img/noten_small_640x853.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
+  background-size:       cover;
+  border-radius:         0.5rem;
+  margin:                0;
+  padding:               0;
+  width:                 23rem;
 }
 
 #container {
@@ -22,13 +22,13 @@
 }
 
 #add {
-  width: 100%;
-  margin-top: 0.2rem;
   border-radius: 0.5rem;
+  margin-top:    0.2rem;
+  width:         100%;
 }
 
 :root {
-  --mdc-theme-primary: #33691E;
+  --mdc-theme-primary:   #33691E;
   --mdc-theme-secondary: #827717;
 }
 
@@ -41,8 +41,8 @@ main {
 }
 
 h2, dd {
-  padding: 0.3rem;
   background-color: var(--mdc-theme-on-primary);
+  padding:          0.3rem;
 }
 
 .aktiv {
@@ -58,43 +58,43 @@ h2, dd {
 }
 
 h1, h2, dl {
-  margin: 0;
+  margin:         0;
   vertical-align: middle;
 }
 
 h2 {
-  padding: 4px 0 10px 4px;
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: 0.5rem;
+  padding:       4px 0 10px 4px;
 }
 
 i.material-icons {
   cursor: pointer;
-  float: right;
+  float:  right;
 }
 
 button.material-icons {
-  font-size: inherit;
+  font-size:      inherit;
   vertical-align: bottom
 }
 
 [type="checkbox"] {
-  vertical-align: top;
-  margin-right: 8px;
+  margin-right:   8px;
+  vertical-align: middle;
 }
 
 dl {
-  border-radius: 0.6rem;
-  display: table;
+  border-radius:  0.5rem;
+  display:        table;
   vertical-align: middle;
-  width: 100%;
+  width:          100%;
 }
 
 dt {
   background-color: cornflowerblue;
-  color: var(--mdc-theme-on-primary);
-  font-weight: 500;
-  padding: 3px 5px;
-  vertical-align: middle;
+  color:            var(--mdc-theme-on-primary);
+  font-weight:      500;
+  padding:          3px 5px;
+  vertical-align:   middle;
 }
 
 dt span {
@@ -102,66 +102,76 @@ dt span {
 }
 
 dt, dd {
-  height: 2rem;
-  font-size: 1rem;
+  font-size:      1rem;
+  height:         2rem;
   vertical-align: middle;
 }
 
 dd {
   display: flex;
-  margin: 0;
+  margin:  0;
 }
 
 dd label {
-  padding: 3px 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
+  overflow:            hidden;
+  padding:             3px 0;
+  text-after-overflow: ellipsis;
+  text-overflow:       ellipsis;
+  vertical-align:      middle;
 }
 
 dd label input[type="checkbox"] {
-  margin: 6px 6px;
+  margin:         6px 6px;
   vertical-align: middle;
 }
 
 dd input[type="search"] {
-  width: 100%;
   margin-left: 1.5rem;
+  width:       100%;
 }
 
 .mdc-text-field {
-  height: 2rem;
+  height: 2.3rem;
 }
 
 label {
-  width: 91%;
-  cursor: pointer;
+  cursor:         pointer;
   vertical-align: middle;
+  width:          91%;
 }
 
 footer {
-  display: flex;
+  display:         flex;
   justify-content: space-between;
-  padding: 0;
+  padding:         0;
 }
 
 
 #genreButton {
-  opacity: 95%;
-  color: whitesmoke;
   background-color: cornflowerblue;
+  border-radius:    0 0.5rem 0 0.5rem;
+  color:            whitesmoke;
+  font-size:        1rem;
+  font-weight:      bolder;
+  opacity:          98%;
 }
 
 #sortButton {
-  opacity: 95%;
-  color: whitesmoke;
   background-color: cornflowerblue;
+  border-radius:    0.5rem 0.5rem 0 0;
+  color:            whitesmoke;
+  font-size:        1rem;
+  font-weight:      bolder;
+  opacity:          98%;
 }
 
 #clearButton {
-  opacity: 95%;
-  color: whitesmoke;
   background-color: cornflowerblue;
+  border-radius:    0.5rem 0 0.5rem 0;
+  color:            whitesmoke;
+  font-size:        1rem;
+  font-weight:      bolder;
+  opacity:          98%;
 }
 
 .mdc-dialog {
@@ -169,24 +179,24 @@ footer {
 }
 
 .mdc-dialog__surface {
+  left:     25px;
   position: absolute;
-  top: 10%;
-  left: 25px;
+  top:      10%;
 }
 
 /*noinspection CssNoGenericFontName*/
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  direction:                     ltr;
+  display:                       inline-block;
+  font-family:                   "Material Icons";
+  -webkit-font-feature-settings: "liga";
+  font-size:                     30px;
+  -webkit-font-smoothing:        antialiased;
+  font-style:                    normal;
+  font-weight:                   normal;
+  letter-spacing:                normal;
+  line-height:                   1;
+  text-transform:                none;
+  white-space:                   nowrap;
+  word-wrap:                     normal;
 }

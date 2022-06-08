@@ -5,8 +5,8 @@ import React from "react"
  * Diese Komponente repräsentiert ein Lied und implementiert das JSX zur Anzeige in der App
  *
  * @component Listeneintrag (dd-Tag in dl in section) ToDo: ausformulieren
- * @property {Lied} lied -
- * @property {Genre} genre -
+ * @property {Lied} lied - das Lied, das in diesem Tag dargestellt wird
+ * @property {Genre} genre - das Genre dem das Lied zugeordnet ist
  * @property {Function} checkHandler - der Event-Handler fürs Abhaken und Reaktivieren, durchgereicht über GenreTag aus der App
  * @property {Function} deleteHandler - der Event-Handler fürs Löschen des Eintrags
  */

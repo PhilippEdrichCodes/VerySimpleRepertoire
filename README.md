@@ -4,4 +4,6 @@ Diese App ist eine sehr einfache Repertoire-Verwaltung
 für die Dirigentin eines kleinen Amateurchors.
 
 Die App ermöglicht das Zusammenstellen eines Sets für einen Auftritt aus Liedern, die
-in der letzten Zeit geprobt wurden. 
+in der letzten Zeit geprobt wurden.
+
+Die Speicherung der Daten erfolgt lediglich im LocalStorage.

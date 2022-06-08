@@ -5,7 +5,7 @@ import SortierDialog from "./components/SortierDialog"
 import Modell from "./model/Repertoire"
 
 /**
- * @version 0.1
+ * @version 0.1 - 20220608
  * @author Philipp Edrich <philipp@edrich.codes>
  * @description Diese App ist eine Einkaufsliste mit React.js und separatem Model, welche Offline verwendet werden kann
  * @license Gnu Public Lesser License 3.0
@@ -23,6 +23,11 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * Nachdem diese Komponente vollständig erstellt ist,
+   * lädt sie den gespeicherten Zustand aus dem LocalStorage
+   * und stellt den Anzeigezustand wieder her
+   */
   componentDidMount () {
     Modell.laden()
     // Auf-/Zu-Klapp-Zustand aus dem LocalStorage laden
@@ -39,36 +44,63 @@ class App extends React.Component {
     })
   }
 
-  einkaufenAufZuKlappen () {
+  /**
+   * Setzt den Anzeigestatus der Set-Liste.
+   * Dreht dazu {@link this.state.imSetAufgeklappt} um,
+   * speichert diesen Zustand im LocalStorage und
+   * aktualisiert den State in (@link this.state)
+   */
+  imSetAufZuKlappen () {
     const neuerZustand = !this.state.imSetAufgeklappt
     localStorage.setItem("imSetAufgeklappt", neuerZustand.toString())
     this.setState({imSetAufgeklappt: neuerZustand})
   }
 
-  erledigtAufZuKlappen () {
+  /**
+   * Setzt den Anzeigestatus der Geprobt-Liste.
+   * Dreht dazu {@link this.state.geprobtAufgeklappt} um,
+   * speichert diesen Zustand im LocalStorage und
+   * aktualisiert den State in (@link this.state)
+   */
+  geprobtAufZuKlappen () {
     const neuerZustand = !this.state.geprobtAufgeklappt
     localStorage.setItem("geprobtAufgeklappt", neuerZustand.toString())
     this.setState({erledigtAufgeklappt: neuerZustand})
   }
 
+  /**
+   * Ermöglicht es, den localStorage vollständig zu löschen.
+   * Fordert eine doppelte Bestätigung mittels PopUps ein.
+   */
   lsLoeschen () {
     if (window.confirm("Wollen Sie wirklich alles löschen?!")) {
-      localStorage.clear()
+      if (window.confirm("Dies kann nicht rückgängig gemacht werden! \n" +
+        " Wirklich sicher, dass sie alles löschen wollen?")) {
+        localStorage.clear()
+      }
     }
   }
 
   /**
-   * Hakt einen Lied ab oder reaktiviert ihn
-   * @param {Lied} artikel - der aktuelle Lied, der gerade abgehakt oder reaktiviert wird
+   * Schiebt ein Lied vom Set in Geprobt oder umgekehrt.
+   * Dreht dazu den Zustand von {@link Lied.geprobt} um.
+   * @param {Lied} lied - das aktuelle Lied, das gerade abgehakt oder reaktiviert wird
    */
-  artikelChecken = (artikel) => {
-    artikel.geprobt = !artikel.geprobt
-    const aktion = (artikel.geprobt) ? "erledigt" : "reaktiviert"
-    Modell.informieren("[App] Lied \"" + artikel.name + "\" wurde " + aktion)
+  liedChecken = (lied) => {
+    lied.geprobt = !lied.geprobt
+    const aktion = (lied.geprobt) ? "aus dem Set genommen" : "ins Set aufgenommen"
+    Modell.informieren("[App] Lied \"" + lied.name + "\" wurde " + aktion)
     this.setState(this.state)
   }
 
-  artikelHinzufuegen () {
+  /**
+   * Fügt ein neues Lied dem aktiven Genre in der Set-Liste hinzu.
+   * Verwendet dazu {@link Modell.aktivesGenre.liedHinzufuegen}.
+   * Den Namen des neuen Lieds holt sich die Methode aus dem Eingabefeld im Header.
+   * Anschließend leert die Methode dieses Feld und setzt den Focus darauf,
+   * sodass direkt ein weiteres Lied hinzugefügt werden kann
+   */
+  liedHinzufuegen () {
     const eingabe = document.getElementById("artikelEingabe")
     const artikelName = eingabe.value.trim()
     if (artikelName.length > 0) {
@@ -79,12 +111,27 @@ class App extends React.Component {
     eingabe.focus()
   }
 
-  setAktiveGruppe (gruppe) {
-    Modell.aktivesGenre = gruppe
-    Modell.informieren("[App] Genre \"" + gruppe.name + "\" ist nun aktiv")
+  /**
+   * Setzt das übergebene Genre als aktives (zu bearbeitendes) Genre.
+   * Speichert dies mittels {@link Modell.informieren} und
+   * aktualisiert den State in {@link this.state}
+   * @param genre
+   */
+  setAktivesGenre (genre) {
+    Modell.aktivesGenre = genre
+    Modell.informieren("[App] Genre \"" + genre.name + "\" ist nun aktiv")
     this.setState({aktiveGruppe: Modell.aktivesGenre})
   }
 
+  /**
+   * Sortiert die Listen in der übergebenen Reihenfolge,
+   * wenn der Vorgang nicht abgebrochen wurde.
+   * Wird vom closeHandler des SortierDialog aufgerufen.
+   * Wenn der Dialog mittels "Abbrechen" geschlossen wurde,
+   * ist der Parameter sortieren false und die Methode sortiert nicht
+   * @param {String} reihenfolge - Die gewünschte Sortierung
+   * @param {boolean} sortieren - Steuert, ob sortiert wird oder nicht.
+   */
   closeSortierDialog = (reihenfolge, sortieren) => {
     if (sortieren) {
       Modell.sortieren(reihenfolge)
@@ -100,8 +147,8 @@ class App extends React.Component {
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktivesGenre}
-            aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
-            checkHandler={this.artikelChecken}
+            aktivesGenreHandler={() => this.setAktivesGenre(gruppe)}
+            checkHandler={this.liedChecken}
             geprobt={false}
             genre={gruppe}
           />)
@@ -115,8 +162,8 @@ class App extends React.Component {
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktivesGenre}
-            aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
-            checkHandler={this.artikelChecken}
+            aktivesGenreHandler={() => this.setAktivesGenre(gruppe)}
+            checkHandler={this.liedChecken}
             geprobt={true}
             genre={gruppe}
           />)
@@ -142,13 +189,15 @@ class App extends React.Component {
           <label id="add"
                  className="mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon mdc-text-field--no-label">
             <span className="mdc-text-field__ripple"></span>
-            <input className="mdc-text-field__input" type="search"
-                   id="artikelEingabe" placeholder="Lied hinzufügen"
-                   onKeyDown={e => (e.key === "Enter") ? this.artikelHinzufuegen() : ""}/>
+            <input className="mdc-text-field__input"
+                   type="search"
+                   id="artikelEingabe"
+                   placeholder="Lied hinzufügen"
+                   onKeyDown={e => (e.key === "Enter") ? this.liedHinzufuegen() : ""}/>
             <span className="mdc-line-ripple"></span>
             <i className="material-icons mdc-text-field__icon mdc-text-field__icon--trailing"
                tabIndex="0" role="button"
-               onClick={() => this.artikelHinzufuegen()}>add_circle</i>
+               onClick={() => this.liedHinzufuegen()}>add_circle</i>
           </label>
 
         </header>
@@ -157,7 +206,7 @@ class App extends React.Component {
         <main>
           <section>
             <h2>Im Set
-              <i onClick={() => this.einkaufenAufZuKlappen()} className="material-icons">
+              <i onClick={() => this.imSetAufZuKlappen()} className="material-icons">
                 {this.state.imSetAufgeklappt ? "expand_more" : "expand_less"}
               </i>
             </h2>
@@ -168,7 +217,7 @@ class App extends React.Component {
           <hr/>
           <section>
             <h2>Aktiv
-              <i onClick={() => this.erledigtAufZuKlappen()} className="material-icons">
+              <i onClick={() => this.geprobtAufZuKlappen()} className="material-icons">
                 {this.state.geprobtAufgeklappt ? "expand_more" : "expand_less"}
               </i>
             </h2>
@@ -180,7 +229,8 @@ class App extends React.Component {
         <hr/>
 
         <footer>
-          <button id="genreButton" className="mdc-button mdc-button--raised"
+          <button id="genreButton"
+                  className="mdc-button mdc-button--raised"
                   onClick={() => this.setState({showGruppenDialog: true})}>
             <span className="material-icons">bookmark_add</span>
             <span className="mdc-button__ripple"></span> Genre

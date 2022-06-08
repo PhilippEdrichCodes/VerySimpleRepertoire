@@ -1,6 +1,6 @@
 import React from "react"
 import Modell from "../model/Repertoire"
-import GruppeBearbeitenTag from "./GruppeBearbeitenTag"
+import GenreBearbeitenTag from "./GenreBearbeitenTag"
 
 class GenreDialog extends React.Component {
   constructor (props) {
@@ -42,7 +42,7 @@ class GenreDialog extends React.Component {
   render () {
     const genreListe = []
     for (let genre of this.state.genreListe) {
-      genreListe.push(<GruppeBearbeitenTag
+      genreListe.push(<GenreBearbeitenTag
         key={genre.id}
         genre={genre}
         entfernenHandler={() => this.genreLoeschen(genre.name)}/>)

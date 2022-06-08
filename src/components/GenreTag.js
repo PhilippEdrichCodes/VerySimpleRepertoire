@@ -11,7 +11,7 @@ import LiedTag from "./LiedTag"
  * @property {Function} aktiveGruppeHandler - setzt dieses Genre als `aktivesGenre` in der {@link ../App}
  * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link LiedTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Genre in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
- * @property {Genre} gruppe - das darzustellende Genre
+ * @property {Genre} genre - das darzustellende Genre
  */
 class GenreTag extends React.Component {
   constructor (props) {

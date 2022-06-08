@@ -1,7 +1,8 @@
+import PropTypes from "prop-types"
 import React from "react"
 import Modell from "../model/Repertoire"
 
-class GruppeBearbeitenTag extends React.Component {
+class GenreBearbeitenTag extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -11,22 +12,22 @@ class GruppeBearbeitenTag extends React.Component {
   }
 
   handleChange (event) {
-    let gruppenName = event.target.value
-    this.setState({newName: gruppenName})
+    let genreName = event.target.value
+    this.setState({newName: genreName})
   }
 
-  gruppeUmbenennen (gruppe, event) {
+  genreUmbenennen (genre, event) {
     if (event && event.key !== "Enter") return
-    Modell.genreUmbenennen(gruppe.name, this.state.newName)
+    Modell.genreUmbenennen(genre.name, this.state.newName)
     this.setState({isEditing: false})
   }
 
   render () {
-    const gruppe = this.props.gruppe
+    const genre = this.props.genre
 
     const viewTemplate = (
       <dt>
-        <span>{gruppe.name}</span>
+        <span>{genre.name}</span>
         <i className="material-icons"
            onClick={() => this.setState({isEditing: true})}>
           drive_file_rename_outline</i>
@@ -38,11 +39,11 @@ class GruppeBearbeitenTag extends React.Component {
       <dt>
         <input type="search" value={this.state.newName} autoFocus={true}
                onChange={event => this.handleChange(event)}
-               onKeyDown={event => this.gruppeUmbenennen(gruppe, event)}/>
+               onKeyDown={event => this.genreUmbenennen(genre, event)}/>
         <i className="material-icons"
            onClick={() => this.setState({isEditing: false})}>cancel </i>
         <i className="material-icons"
-           onClick={() => this.gruppeUmbenennen(gruppe)}>check_circle </i>
+           onClick={() => this.genreUmbenennen(genre)}>check_circle </i>
       </dt>
     )
 
@@ -54,4 +55,9 @@ class GruppeBearbeitenTag extends React.Component {
   }
 }
 
-export default GruppeBearbeitenTag
+GenreBearbeitenTag.propTypes = {
+  genre: PropTypes.object.isRequired,
+  entfernenHandler: PropTypes.func.isRequired
+}
+
+export default GenreBearbeitenTag
