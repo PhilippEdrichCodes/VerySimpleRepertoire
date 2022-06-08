@@ -1,23 +1,25 @@
 /**
  * Klasse zum Beschreiben eines Artikels
  *
- * @property {Number}  counter - dient zur Erzeugung eindeutiger Artikel-IDs
+ * @property {Number}  counter - dient zur Erzeugung eindeutiger Lied-IDs
  * @property {Number}  id      - eindeutige ID-Nummer des Artikels
  * @property {Number}  index   - Position des Artikels innerhalb der Artikelliste
  * @property {String}  name    - Name des Artikels
- * @property {Boolean} gekauft - merkt sich, ob der Artikel bereits gekauft wurde
+ * @property {Boolean} gekauft - merkt sich, ob der Lied bereits gekauft wurde
  */
-class Artikel {
+class Lied {
   static counter = 1
-  id = Artikel.counter++
+  id
   index
   name
-  gekauft = false
+  gekauft
 
   constructor (name, index) {
+    this.id = Lied.counter++
     this.name = name
     this.index = index
+    this.gekauft = false
   }
 }
 
-export default Artikel
+export default Lied

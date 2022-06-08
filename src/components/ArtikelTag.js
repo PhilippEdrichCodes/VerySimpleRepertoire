@@ -20,8 +20,8 @@ class ArtikelTag extends React.Component {
   }
 
   /**
-   * Benennt einen Artikel um
-   * @param {Artikel} artikel - der umzubenennende Artikel
+   * Benennt einen Lied um
+   * @param {Lied} artikel - der umzubenennende Lied
    * @param {Event.KEYPRESS} event -
    */
   artikelUmbenennen (artikel, event) {

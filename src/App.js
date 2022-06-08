@@ -1,8 +1,8 @@
 import React from "react"
-import Modell from "./model/Repertoire"
-import GruppenTag from "./components/GruppenTag"
 import GruppenDialog from "./components/GruppenDialog"
+import GruppenTag from "./components/GruppenTag"
 import SortierDialog from "./components/SortierDialog"
+import Modell from "./model/Repertoire"
 
 /**
  * @version 1.0
@@ -58,13 +58,13 @@ class App extends React.Component {
   }
 
   /**
-   * Hakt einen Artikel ab oder reaktiviert ihn
-   * @param {Artikel} artikel - der aktuelle Artikel, der gerade abgehakt oder reaktiviert wird
+   * Hakt einen Lied ab oder reaktiviert ihn
+   * @param {Lied} artikel - der aktuelle Lied, der gerade abgehakt oder reaktiviert wird
    */
   artikelChecken = (artikel) => {
     artikel.gekauft = !artikel.gekauft
     const aktion = (artikel.gekauft) ? "erledigt" : "reaktiviert"
-    Modell.informieren("[App] Artikel \"" + artikel.name + "\" wurde " + aktion)
+    Modell.informieren("[App] Lied \"" + artikel.name + "\" wurde " + aktion)
     this.setState(this.state)
   }
 
@@ -143,7 +143,7 @@ class App extends React.Component {
                  className="mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon mdc-text-field--no-label">
             <span className="mdc-text-field__ripple"></span>
             <input className="mdc-text-field__input" type="search"
-                   id="artikelEingabe" placeholder="Artikel hinzufügen"
+                   id="artikelEingabe" placeholder="Lied hinzufügen"
                    onKeyDown={e => (e.key === "Enter") ? this.artikelHinzufuegen() : ""}/>
             <span className="mdc-line-ripple"></span>
             <i className="material-icons mdc-text-field__icon mdc-text-field__icon--trailing"

@@ -1,5 +1,5 @@
-import React from "react"
 import PropTypes from "prop-types"
+import React from "react"
 import ArtikelTag from "./ArtikelTag"
 
 /**
@@ -7,7 +7,7 @@ import ArtikelTag from "./ArtikelTag"
  * @component
  * @property {Boolean} aktiv - setzt diese Gruppe als `aktiveGruppe` in der App.js
  * @property {Function} aktiveGruppeHandler - setzt diese Gruppe als `aktiveGruppe` in der {@link ../App}
- * @property {Function} checkHandler - erledigt und reaktiviert Artikel; wird an den {@link ArtikelTag} durchgereicht
+ * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link ArtikelTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Gruppe in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
  * @property {Gruppe} gruppe - die darzustellende Gruppe
  */

@@ -116,7 +116,7 @@ class Repertoire {
   }
 
   /**
-   * Sortiert Gruppen und Artikel nach der übergebenen `reihenfolge`
+   * Sortiert Gruppen und Lied nach der übergebenen `reihenfolge`
    * @param {String} reihenfolge - entspricht einem der Keys aus {@link SORTIERUNGEN}
    */
   sortieren (reihenfolge) {
@@ -125,7 +125,7 @@ class Repertoire {
     // sortiere zuerst die Gruppen
     this.gruppenListe.sort(sortierFunktion)
 
-    // sortiere danach die Artikel jeder Gruppe
+    // sortiere danach die Lied jeder Gruppe
     for (let gruppe of this.gruppenListe) {
       gruppe.artikelListe.sort(sortierFunktion)
     }
@@ -134,8 +134,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente alphabetisch aufsteigend nach dem Namen
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Lied} a - erstes Element
+   * @param {Gruppe|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAufsteigend (a, b) {
@@ -146,8 +146,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente alphabetisch absteigend nach dem Namen
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Lied} a - erstes Element
+   * @param {Gruppe|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAbsteigend (a, b) {
@@ -158,8 +158,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente aufsteigend nach dem ursprünglichen Index
-   * @param {Gruppe|Artikel} a - erstes Element
-   * @param {Gruppe|Artikel} b - zweites Element
+   * @param {Gruppe|Lied} a - erstes Element
+   * @param {Gruppe|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereIndex (a, b) {

@@ -1,32 +1,34 @@
-import Artikel from "./Artikel.js"
+import Lied from "./Lied.js"
 import Modell from "./Repertoire.js"
 
 /**
- * Klasse zum Gruppieren der Artikel
+ * Klasse zum Gruppieren der Lied
  *
  * @property {Number}    counter      - dient zur Erzeugung eindeutiger Gruppen-IDs
  * @property {Number}    id           - eindeutige ID-Nummer der Gruppe
  * @property {Number}    index        - Position der Gruppe innerhalb der Gruppenliste
  * @property {String}    name         - Name der Gruppe
- * @property {Artikel[]} artikelListe - Liste der Artikel in dieser Gruppe
+ * @property {Lied[]} artikelListe - Liste der Lied in dieser Gruppe
  */
 class Gruppe {
   static counter = 1
-  id = Gruppe.counter++
+  id
   index
   name
-  artikelListe = []
+  artikelListe
 
   constructor (name, index) {
+    this.id = Gruppe.counter++
     this.name = name
     this.index = index
+    this.artikelListe = []
   }
 
   /**
-   * Sucht einen Artikel anhand seines Namens
+   * Sucht einen Lied anhand seines Namens
    * @param {String} suchName - Name des gesuchten Artikels
    * @param {Boolean} meldungAusgeben - steuert, ob eine Meldung ausgegeben wird
-   * @returns {Artikel|null} artikel - der gefundene Artikel bzw. `null`, wenn nichts gefunden wurde
+   * @returns {Lied|null} artikel - der gefundene Lied bzw. `null`, wenn nichts gefunden wurde
    */
   artikelFinden (suchName, meldungAusgeben) {
     for (let artikel of this.artikelListe) {
@@ -35,14 +37,14 @@ class Gruppe {
       }
     }
     if (meldungAusgeben) {
-      Modell.informieren("[" + this.name + "] Artikel " + suchName + " nicht gefunden", true)
+      Modell.informieren("[" + this.name + "] Lied " + suchName + " nicht gefunden", true)
     }
     return null
   }
 
   /**
-   * Listet die Artikel in dieser Gruppe in der Konsole auf
-   * @param {Boolean} gekauft - steuert die Anzeige der gekauften oder noch zu kaufenden Artikel
+   * Listet die Lied in dieser Gruppe in der Konsole auf
+   * @param {Boolean} gekauft - steuert die Anzeige der gekauften oder noch zu kaufenden Lied
    */
   artikelAuflisten (gekauft) {
     for (let artikel of this.artikelListe) {
@@ -53,24 +55,24 @@ class Gruppe {
   }
 
   /**
-   * Fügt einen Artikel zur ArtikelListe hinzu und gibt diesen als Wert zurück
+   * Fügt einen Lied zur ArtikelListe hinzu und gibt diesen als Wert zurück
    * @param {String} name - Name des neuen Artikels
-   * @returns {Artikel} neuerArtikel - der neu erzeugte Artikel
+   * @returns {Lied} neuerArtikel - der neu erzeugte Lied
    */
   artikelHinzufuegen (name) {
     let vorhandenerArtikel = this.artikelFinden(name, false)
     if (!vorhandenerArtikel) {
-      let neuerArtikel = new Artikel(name, this.artikelListe.length)
+      let neuerArtikel = new Lied(name, this.artikelListe.length)
       this.artikelListe.push(neuerArtikel)
-      Modell.informieren("[" + this.name + "] Artikel " + name + " hinzugefügt")
+      Modell.informieren("[" + this.name + "] Lied " + name + " hinzugefügt")
       return neuerArtikel
     } else {
-      Modell.informieren("[" + this.name + "] Artikel " + name + " existiert schon!", true)
+      Modell.informieren("[" + this.name + "] Lied " + name + " existiert schon!", true)
     }
   }
 
   /**
-   * Erzeugt einen neuen Artikel aus einem eingelesenen JSON-Objekt.
+   * Erzeugt einen neuen Lied aus einem eingelesenen JSON-Objekt.
    * Wird von {@link Modell.initialisieren()} verwendet.
    * @param {object} artikel - das übergebene JSON-Objekt
    */
@@ -81,7 +83,7 @@ class Gruppe {
   }
 
   /**
-   * Entfernt einen Artikel aus der ArtikelListe
+   * Entfernt einen Lied aus der ArtikelListe
    * @param {String} name - Index des zu entfernenden Artikels
    */
   artikelEntfernen (name) {
@@ -90,16 +92,16 @@ class Gruppe {
       const index = this.artikelListe.indexOf(loeschArtikel)
       this.artikelListe.splice(index, 1)
       this.artikelNeuNummerieren()
-      Modell.informieren("[" + this.name + "] Artikel \"" + name + "\" entfernt"
+      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" entfernt"
       )
     } else {
-      Modell.informieren("[" + this.name + "] Artikel \"" + name + "\" konnte NICHT entfernt werden", true
+      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" konnte NICHT entfernt werden", true
       )
     }
   }
 
   /**
-   * Nummeriert alle Artikel in der Artikel-Liste neu durch
+   * Nummeriert alle Lied in der Lied-Liste neu durch
    */
   artikelNeuNummerieren () {
     for (let i = 0; i < this.artikelListe.length; i++) {
@@ -108,7 +110,7 @@ class Gruppe {
   }
 
   /**
-   * Sucht einen Artikel anhand des Namens und benennt ihn um.
+   * Sucht einen Lied anhand des Namens und benennt ihn um.
    * @param {String} alterName - Name des zu findenden Artikels
    * @param {String} neuerName - neuer Name des Artikels
    */
@@ -117,7 +119,7 @@ class Gruppe {
     if (vorhandenerArtikel) {
       vorhandenerArtikel.name = neuerName
     }
-    Modell.informieren("[" + this.name + "] Artikel \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
+    Modell.informieren("[" + this.name + "] Lied \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
   }
 }
 
