@@ -5,8 +5,8 @@ import SortierDialog from "./components/SortierDialog"
 import Modell from "./model/Repertoire"
 
 /**
- * @version 1.0
- * @author Alfred Walther <alfred.walther@syntax-institut.de>
+ * @version 0.1
+ * @author Philipp Edrich <philipp@edrich.codes>
  * @description Diese App ist eine Einkaufsliste mit React.js und separatem Model, welche Offline verwendet werden kann
  * @license Gnu Public Lesser License 3.0
  *
@@ -15,39 +15,39 @@ class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      aktiveGruppe: null,
+      aktivesGenre: null,
       showGruppenDialog: false,
       showSortierDialog: false,
-      einkaufenAufgeklappt: true,
-      erledigtAufgeklappt: false
+      imSetAufgeklappt: true,
+      geprobtAufgeklappt: false
     }
   }
 
   componentDidMount () {
     Modell.laden()
     // Auf-/Zu-Klapp-Zustand aus dem LocalStorage laden
-    let einkaufenAufgeklappt = localStorage.getItem("einkaufenAufgeklappt")
-    einkaufenAufgeklappt = (einkaufenAufgeklappt == null) ? true : JSON.parse(einkaufenAufgeklappt)
+    let imSetIstAufgeklappt = localStorage.getItem("imSetAufgeklappt")
+    imSetIstAufgeklappt = (imSetIstAufgeklappt == null) ? true : JSON.parse(imSetIstAufgeklappt)
 
-    let erledigtAufgeklappt = localStorage.getItem("erledigtAufgeklappt")
-    erledigtAufgeklappt = (erledigtAufgeklappt == null) ? false : JSON.parse(erledigtAufgeklappt)
+    let geprobtIstAufgeklappt = localStorage.getItem("geprobtAufgeklappt")
+    geprobtIstAufgeklappt = (geprobtIstAufgeklappt == null) ? false : JSON.parse(geprobtIstAufgeklappt)
 
     this.setState({
-      aktiveGruppe: Modell.aktivesGenre,
-      einkaufenAufgeklappt: einkaufenAufgeklappt,
-      erledigtAufgeklappt: erledigtAufgeklappt
+      aktivesGenre: Modell.aktivesGenre,
+      imSetAufgeklappt: imSetIstAufgeklappt,
+      geprobtAufgeklappt: geprobtIstAufgeklappt
     })
   }
 
   einkaufenAufZuKlappen () {
-    const neuerZustand = !this.state.einkaufenAufgeklappt
-    localStorage.setItem("einkaufenAufgeklappt", neuerZustand)
-    this.setState({einkaufenAufgeklappt: neuerZustand})
+    const neuerZustand = !this.state.imSetAufgeklappt
+    localStorage.setItem("imSetAufgeklappt", neuerZustand.toString())
+    this.setState({imSetAufgeklappt: neuerZustand})
   }
 
   erledigtAufZuKlappen () {
-    const neuerZustand = !this.state.erledigtAufgeklappt
-    localStorage.setItem("erledigtAufgeklappt", neuerZustand)
+    const neuerZustand = !this.state.geprobtAufgeklappt
+    localStorage.setItem("geprobtAufgeklappt", neuerZustand.toString())
     this.setState({erledigtAufgeklappt: neuerZustand})
   }
 
@@ -94,7 +94,7 @@ class App extends React.Component {
 
   render () {
     let nochZuKaufen = []
-    if (this.state.einkaufenAufgeklappt === true) {
+    if (this.state.imSetAufgeklappt === true) {
       for (const gruppe of Modell.genreListe) {
         nochZuKaufen.push(
           <GenreTag
@@ -109,7 +109,7 @@ class App extends React.Component {
     }
 
     let schonGekauft = []
-    if (this.state.erledigtAufgeklappt) {
+    if (this.state.geprobtAufgeklappt) {
       for (const gruppe of Modell.genreListe) {
         schonGekauft.push(
           <GenreTag
@@ -158,7 +158,7 @@ class App extends React.Component {
           <section>
             <h2>Im Set
               <i onClick={() => this.einkaufenAufZuKlappen()} className="material-icons">
-                {this.state.einkaufenAufgeklappt ? "expand_more" : "expand_less"}
+                {this.state.imSetAufgeklappt ? "expand_more" : "expand_less"}
               </i>
             </h2>
             <dl>
@@ -169,7 +169,7 @@ class App extends React.Component {
           <section>
             <h2>Aktiv
               <i onClick={() => this.erledigtAufZuKlappen()} className="material-icons">
-                {this.state.erledigtAufgeklappt ? "expand_more" : "expand_less"}
+                {this.state.geprobtAufgeklappt ? "expand_more" : "expand_less"}
               </i>
             </h2>
             <dl>
