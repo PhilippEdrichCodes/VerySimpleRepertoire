@@ -21,20 +21,33 @@ class GenreTag extends React.Component {
     }
   }
 
+  /**
+   * Nachdem die Komponente vollständig geladen ist, wird der State der Komponente aus dem LocalStorage geladen
+   */
   componentDidMount () {
     let aufgeklappt = localStorage.getItem("genre-" + this.props.genre.id)
     aufgeklappt = (aufgeklappt == null) ? true : JSON.parse(aufgeklappt)
     this.setState({aufgeklappt: aufgeklappt})
   }
 
-  artikelEntfernen (name) {
-
+  /**
+   * Diese Methode ermöglicht das Löschen eines Lieds.
+   * Sie verwendet {@link Genre.liedLoeschen}.
+   * Es wird eine Bestätigung mittels PopUp angefordert
+   * @param {String} name - Der Name des Lieds, das gelöscht werden soll.
+   */
+  liedLoeschen (name) {
     if (window.confirm("Wollen Sie diesen Eintrag wirklich löschen?!")) {
       this.props.genre.liedLoeschen(name)
     }
     this.props.aktivesGenreHandler(this.props.genre)
   }
 
+  /**
+   * Die Methode ermöglicht das Auf- und Zuklappen des Genres in der Anzeige.
+   * Sie schaltet dazu {@link this.state.aufgeklappt} um.
+   * Dieser wird auch gleich im LocalStorage aktualisiert
+   */
   aufZuKlappen () {
     const neuerZustand = !this.state.aufgeklappt
     localStorage.setItem("genre-" + this.props.genre.id, neuerZustand.toString())
@@ -62,7 +75,7 @@ class GenreTag extends React.Component {
             <LiedTag lied={lied} key={lied.id}
                      genre={genre}
                      checkHandler={this.props.checkHandler}
-                     deleteHandler={() => this.artikelEntfernen(lied.name)}/>)
+                     deleteHandler={() => this.liedLoeschen(lied.name)}/>)
         }
       }
     }
