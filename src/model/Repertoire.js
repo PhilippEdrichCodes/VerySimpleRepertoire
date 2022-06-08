@@ -8,7 +8,7 @@ import Genre from "./Genre.js"
  * @property {boolean}  meldungenAusgeben - steuert, ob eine Meldung ausgegeben werden soll oder nicht
  */
 class Repertoire {
-  gruppenListe = []
+  genreListe = []
   aktiveGruppe = null
   meldungenAusgeben = true
   SORTIERUNGEN = {
@@ -26,7 +26,7 @@ class Repertoire {
    * @returns {Genre | null} gefundeneGruppe - die gefundene Genre; `null`, wenn nichts gefunden wurde
    */
   gruppeFinden (suchName, meldungAusgeben = false) {
-    for (let gruppe of this.gruppenListe) {
+    for (let gruppe of this.genreListe) {
       if (gruppe.name === suchName) {
         return gruppe
       }
@@ -46,8 +46,8 @@ class Repertoire {
   gruppeHinzufuegen (name) {
     let vorhandeneGruppe = this.gruppeFinden(name)
     if (!vorhandeneGruppe) {
-      let neueGruppe = new Genre(name, this.gruppenListe.length)
-      this.gruppenListe.push(neueGruppe)
+      let neueGruppe = new Genre(name, this.genreListe.length)
+      this.genreListe.push(neueGruppe)
       this.informieren("[App] Genre \"" + name + "\" hinzugefügt")
       return neueGruppe
     } else {
@@ -62,8 +62,8 @@ class Repertoire {
   gruppeEntfernen (name) {
     let loeschGruppe = this.gruppeFinden(name)
     if (loeschGruppe) {
-      let index = this.gruppenListe.indexOf(loeschGruppe)
-      this.gruppenListe.splice(index, 1)
+      let index = this.genreListe.indexOf(loeschGruppe)
+      this.genreListe.splice(index, 1)
       this.informieren("[App] Genre \"" + name + "\" entfernt"
       )
     } else {
@@ -93,7 +93,7 @@ class Repertoire {
   /* allesAuflisten () {
     console.debug("Einkaufsliste")
     console.debug("--------------------")
-    for (const genre of this.gruppenListe) {
+    for (const genre of this.genreListe) {
       console.debug("[" + genre.name + "]")
       genre.artikelAuflisten(false)
     }
@@ -123,10 +123,10 @@ class Repertoire {
     this.sortierung = reihenfolge
     const sortierFunktion = this.SORTIERUNGEN[reihenfolge]
     // sortiere zuerst die Gruppen
-    this.gruppenListe.sort(sortierFunktion)
+    this.genreListe.sort(sortierFunktion)
 
     // sortiere danach die Lied jeder Genre
-    for (let gruppe of this.gruppenListe) {
+    for (let gruppe of this.genreListe) {
       gruppe.liedListe.sort(sortierFunktion)
     }
     this.informieren("[App] nach \"" + reihenfolge + "\" sortiert")
@@ -172,7 +172,7 @@ class Repertoire {
    */
   speichern (daten = this) {
     const json = {
-      gruppenListe: this.gruppenListe,
+      gruppenListe: this.genreListe,
       aktiveGruppeName: this.aktiveGruppe?.name,
     }
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(json))
@@ -197,8 +197,8 @@ class Repertoire {
    * @param {Object} jsonDaten - die übergebenen JSON-Daten
    */
   initialisieren (jsonDaten) {
-    this.gruppenListe = []
-    for (let gruppe of jsonDaten.gruppenListe) {
+    this.genreListe = []
+    for (let gruppe of jsonDaten.genreListe) {
       let neueGruppe = this.gruppeHinzufuegen(gruppe.name)
       for (let artikel of gruppe.liedListe) {
         neueGruppe.liedAusJSONHinzufuegen(artikel)

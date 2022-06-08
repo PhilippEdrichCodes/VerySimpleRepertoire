@@ -95,7 +95,7 @@ class App extends React.Component {
   render () {
     let nochZuKaufen = []
     if (this.state.einkaufenAufgeklappt === true) {
-      for (const gruppe of Modell.gruppenListe) {
+      for (const gruppe of Modell.genreListe) {
         nochZuKaufen.push(
           <GenreTag
             key={gruppe.id}
@@ -110,7 +110,7 @@ class App extends React.Component {
 
     let schonGekauft = []
     if (this.state.erledigtAufgeklappt) {
-      for (const gruppe of Modell.gruppenListe) {
+      for (const gruppe of Modell.genreListe) {
         schonGekauft.push(
           <GenreTag
             key={gruppe.id}
@@ -126,7 +126,7 @@ class App extends React.Component {
     let gruppenDialog = ""
     if (this.state.showGruppenDialog) {
       gruppenDialog = <GruppenDialog
-        gruppenListe={Modell.gruppenListe}
+        gruppenListe={Modell.genreListe}
         onDialogClose={() => this.setState({showGruppenDialog: false})}/>
     }
 

@@ -6,7 +6,7 @@ class GruppenDialog extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      gruppenListe: this.props.gruppenListe
+      gruppenListe: this.props.genreListe
     }
   }
 
@@ -15,7 +15,7 @@ class GruppenDialog extends React.Component {
     let gruppenName = eingabe.value.trim()
     if (gruppenName.length > 0) {
       Modell.gruppeHinzufuegen(gruppenName)
-      this.setState({gruppenListe: Modell.gruppenListe})
+      this.setState({gruppenListe: Modell.genreListe})
     }
     eingabe.value = ""
     eingabe.focus()
@@ -23,12 +23,12 @@ class GruppenDialog extends React.Component {
 
   gruppeEntfernen (name) {
     Modell.gruppeEntfernen(name)
-    this.setState({gruppenListe: Modell.gruppenListe})
+    this.setState({gruppenListe: Modell.genreListe})
   }
 
   render () {
     const gruppenListe = []
-    for (let gruppe of this.state.gruppenListe) {
+    for (let gruppe of this.state.genreListe) {
       gruppenListe.push(
         <GruppeBearbeitenTag
           key={gruppe.id}
