@@ -1,0 +1,192 @@
+#root {
+  margin: 0;
+  padding: 0;
+
+  /* size */
+  width: 23rem;
+
+  /* shape */
+  border-radius: 0.5rem;
+
+  /* background */
+  background-image: url("../img/noten_small_640x853.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#container {
+
+  opacity: 85%;
+}
+
+#add {
+  width: 100%;
+  margin-top: 0.2rem;
+  border-radius: 0.5rem;
+}
+
+:root {
+  --mdc-theme-primary: #33691E;
+  --mdc-theme-secondary: #827717;
+}
+
+header {
+  padding: 0.3rem;
+}
+
+main {
+  padding: 0.4rem;
+}
+
+h2, dd {
+  padding: 0.3rem;
+  background-color: var(--mdc-theme-on-primary);
+}
+
+.aktiv {
+  background-color: chocolate
+}
+
+.inaktiv {
+  background-color: cornflowerblue
+}
+
+.popup {
+  border-radius: 2rem;
+}
+
+h1, h2, dl {
+  margin: 0;
+  vertical-align: middle;
+}
+
+h2 {
+  padding: 4px 0 10px 4px;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+i.material-icons {
+  cursor: pointer;
+  float: right;
+}
+
+button.material-icons {
+  font-size: inherit;
+  vertical-align: bottom
+}
+
+[type="checkbox"] {
+  vertical-align: top;
+  margin-right: 8px;
+}
+
+dl {
+  border-radius: 0.6rem;
+  display: table;
+  vertical-align: middle;
+  width: 100%;
+}
+
+dt {
+  background-color: cornflowerblue;
+  color: var(--mdc-theme-on-primary);
+  font-weight: 500;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+dt span {
+  width: 100%;
+}
+
+dt, dd {
+  height: 2rem;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+dd {
+  display: flex;
+  margin: 0;
+}
+
+dd label {
+  padding: 3px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+dd label input[type="checkbox"] {
+  margin: 6px 6px;
+  vertical-align: middle;
+}
+
+dd input[type="search"] {
+  width: 100%;
+  margin-left: 1.5rem;
+}
+
+.mdc-text-field {
+  height: 2rem;
+}
+
+label {
+  width: 91%;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+
+#genreButton {
+  opacity: 95%;
+  color: whitesmoke;
+  background-color: cornflowerblue;
+}
+
+#sortButton {
+  opacity: 95%;
+  color: whitesmoke;
+  background-color: cornflowerblue;
+}
+
+#clearButton {
+  opacity: 95%;
+  color: whitesmoke;
+  background-color: cornflowerblue;
+}
+
+.mdc-dialog {
+  opacity: 100%;
+}
+
+.mdc-dialog__surface {
+  position: absolute;
+  top: 10%;
+  left: 25px;
+}
+
+/*noinspection CssNoGenericFontName*/
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
