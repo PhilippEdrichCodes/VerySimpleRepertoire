@@ -25,7 +25,7 @@ class Repertoire {
    * @param {Boolean} meldungAusgeben - steuert, ob eine Meldung ausgegeben wird
    * @returns {Gruppe | null} gefundeneGruppe - die gefundene Gruppe; `null`, wenn nichts gefunden wurde
    */
-  gruppeFinden (suchName, meldungAusgeben) {
+  gruppeFinden (suchName, meldungAusgeben = false) {
     for (let gruppe of this.gruppenListe) {
       if (gruppe.name === suchName) {
         return gruppe
@@ -85,16 +85,19 @@ class Repertoire {
   }
 
   /**
+   * For Debugging only
+   *
    * Gibt die Gruppen mit Artikeln auf der Konsole aus
    */
-  allesAuflisten () {
+
+  /* allesAuflisten () {
     console.debug("Einkaufsliste")
     console.debug("--------------------")
     for (const gruppe of this.gruppenListe) {
       console.debug("[" + gruppe.name + "]")
       gruppe.artikelAuflisten(false)
     }
-  }
+  } */
 
   /**
    * Gibt eine Meldung aus und speichert den aktuellen Zustand im LocalStorage
@@ -167,7 +170,7 @@ class Repertoire {
    * Speichert den Modell-Zustand im LocalStorage
    * @param {Object} daten - entspricht dem Auf-Zuklapp-Zustand der App
    */
-  speichern (daten) {
+  speichern (daten = this) {
     const json = {
       gruppenListe: this.gruppenListe,
       aktiveGruppeName: this.aktiveGruppe?.name,
