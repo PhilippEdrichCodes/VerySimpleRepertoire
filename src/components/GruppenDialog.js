@@ -14,7 +14,7 @@ class GruppenDialog extends React.Component {
     let eingabe = document.getElementById("eingabe")
     let gruppenName = eingabe.value.trim()
     if (gruppenName.length > 0) {
-      Modell.gruppeHinzufuegen(gruppenName)
+      Modell.genreHinzufuegen(gruppenName)
       this.setState({gruppenListe: Modell.genreListe})
     }
     eingabe.value = ""
@@ -22,7 +22,7 @@ class GruppenDialog extends React.Component {
   }
 
   gruppeEntfernen (name) {
-    Modell.gruppeEntfernen(name)
+    Modell.genreLoeschen(name)
     this.setState({gruppenListe: Modell.genreListe})
   }
 

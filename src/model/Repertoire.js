@@ -3,8 +3,8 @@ import Genre from "./Genre.js"
 /**
  * Diese Klasse steuert das Modell der App
  *
- * @property {Genre[]} gruppenListe      - enthält die Artikelgruppen
- * @property {Genre}   aktiveGruppe      - enthält die aktuell ausgewählte Genre
+ * @property {Genre[]} genreListe      - enthält die Genres
+ * @property {Genre}   aktivesGenre      - enthält das aktuell ausgewählte Genre
  * @property {boolean}  meldungenAusgeben - steuert, ob eine Meldung ausgegeben werden soll oder nicht
  */
 class Repertoire {
@@ -20,15 +20,15 @@ class Repertoire {
   STORAGE_KEY = "repertoireDaten"
 
   /**
-   * Sucht eine Genre nach ihrem Namen und liefert sie als Objekt zurück
-   * @param {String} suchName - Name der gesuchten Genre
+   * Sucht ein Genre nach ihrem Namen und liefert sie als Objekt zurück
+   * @param {String} suchName - Name des gesuchten Genres
    * @param {Boolean} meldungAusgeben - steuert, ob eine Meldung ausgegeben wird
-   * @returns {Genre | null} gefundeneGruppe - die gefundene Genre; `null`, wenn nichts gefunden wurde
+   * @returns {Genre | null} gefundeneGruppe - das gefundene Genre; `null`, wenn nichts gefunden wurde
    */
-  gruppeFinden (suchName, meldungAusgeben = false) {
-    for (let gruppe of this.genreListe) {
-      if (gruppe.name === suchName) {
-        return gruppe
+  genreFinden (suchName, meldungAusgeben = false) {
+    for (let genre of this.genreListe) {
+      if (genre.name === suchName) {
+        return genre
       }
     }
     // nichts gefunden, meldung ausgeben
@@ -39,13 +39,13 @@ class Repertoire {
   }
 
   /**
-   * Fügt eine Genre in der Gruppenliste hinzu
-   * @param {String} name - Name der neuen Genre
-   * @returns {Genre} neueGruppe - die neu hinzugefügte Genre
+   * Fügt ein Genre der Genre-liste {@link this.genreListe} hinzu
+   * @param {String} name - Name des neuen Genres
+   * @returns {Genre} neueGruppe - das neu hinzugefügte Genre
    */
-  gruppeHinzufuegen (name) {
-    let vorhandeneGruppe = this.gruppeFinden(name)
-    if (!vorhandeneGruppe) {
+  genreHinzufuegen (name) {
+    let vorhandenesGenre = this.genreFinden(name)
+    if (!vorhandenesGenre) {
       let neueGruppe = new Genre(name, this.genreListe.length)
       this.genreListe.push(neueGruppe)
       this.informieren("[App] Genre \"" + name + "\" hinzugefügt")
@@ -56,13 +56,13 @@ class Repertoire {
   }
 
   /**
-   * Entfernt die Genre mit dem `name`
-   * @param {String} name - Name der zu löschenden Genre
+   * Entfernt das Genre mit dem übergebenen Namen
+   * @param {String} name - Name des zu löschenden Genres
    */
-  gruppeEntfernen (name) {
-    let loeschGruppe = this.gruppeFinden(name)
-    if (loeschGruppe) {
-      let index = this.genreListe.indexOf(loeschGruppe)
+  genreLoeschen (name) {
+    let loeschGenre = this.genreFinden(name)
+    if (loeschGenre) {
+      let index = this.genreListe.indexOf(loeschGenre)
       this.genreListe.splice(index, 1)
       this.informieren("[App] Genre \"" + name + "\" entfernt"
       )
@@ -72,12 +72,12 @@ class Repertoire {
   }
 
   /**
-   * Benennt die Genre `alterName` um
-   * @param {String} alterName - Name der umzubenennenden Genre
-   * @param {String} neuerName - der neue Name der Genre
+   * Benennt das Genre mit dem Namen `alterName` in `neuerName` um
+   * @param {String} alterName - Name des umzubenennenden Genres
+   * @param {String} neuerName - der neue Name des Genres
    */
-  gruppeUmbenennen (alterName, neuerName) {
-    let suchGruppe = this.gruppeFinden(alterName, true)
+  genreUmbenennen (alterName, neuerName) {
+    let suchGruppe = this.genreFinden(alterName, true)
     if (suchGruppe) {
       suchGruppe.name = neuerName
       this.informieren("[App] Genre \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
@@ -199,13 +199,13 @@ class Repertoire {
   initialisieren (jsonDaten) {
     this.genreListe = []
     for (let gruppe of jsonDaten.genreListe) {
-      let neueGruppe = this.gruppeHinzufuegen(gruppe.name)
+      let neueGruppe = this.genreHinzufuegen(gruppe.name)
       for (let artikel of gruppe.liedListe) {
         neueGruppe.liedAusJSONHinzufuegen(artikel)
       }
     }
     if (jsonDaten.aktiveGruppeName) {
-      this.aktivesGenre = this.gruppeFinden(jsonDaten.aktiveGruppeName)
+      this.aktivesGenre = this.genreFinden(jsonDaten.aktiveGruppeName)
     }
   }
 }
