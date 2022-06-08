@@ -10,19 +10,32 @@ class GenreDialog extends React.Component {
     }
   }
 
-  gruppeHinzufuegen () {
+  /**
+   * Diese Methode fügt der Genre-Liste einen neuen Eintrag hinzu.
+   * Sie nutzt dazu {@link Modell.genreHinzufuegen}.
+   * Den Namen des neuen Genres holt sich die Methode aus dem Eingabefeld.
+   */
+  genreHinzufuegen () {
     let eingabe = document.getElementById("eingabe")
-    let gruppenName = eingabe.value.trim()
-    if (gruppenName.length > 0) {
-      Modell.genreHinzufuegen(gruppenName)
-      this.setState({gruppenListe: Modell.genreListe})
+    let genreName = eingabe.value.trim()
+    if (genreName.length > 0) {
+      Modell.genreHinzufuegen(genreName)
+      this.setState({genreListe: Modell.genreListe})
     }
     eingabe.value = ""
     eingabe.focus()
   }
 
+  /**
+   * Die Methode löscht einen Eintrag aus der Genre-Liste.
+   * Sie nutzt dazu {@link Modell.genreLoeschen}.
+   * Es wird eine Bestätigung mittels PopUp angefordert.
+   * @param {String} name - der Name des zu löschenden Genre
+   */
   gruppeEntfernen (name) {
-    Modell.genreLoeschen(name)
+    if (window.confirm("Wollen Sie diesen Eintrag wirklich löschen?!")) {
+      Modell.genreLoeschen(name)
+    }
     this.setState({gruppenListe: Modell.genreListe})
   }
 
@@ -53,11 +66,11 @@ class GenreDialog extends React.Component {
                 <span className="mdc-text-field__ripple"></span>
                 <input className="mdc-text-field__input" type="search" id="eingabe"
                        placeholder="Genre hinzufügen" autoComplete="false"
-                       onKeyDown={e => (e.key === "Enter") ? this.gruppeHinzufuegen() : ""}/>
+                       onKeyDown={e => (e.key === "Enter") ? this.genreHinzufuegen() : ""}/>
                 <span className="mdc-line-ripple"></span>
                 <i className="material-icons mdc-text-field__icon mdc-text-field__icon--trailing"
                    tabIndex="0" role="button"
-                   onClick={() => this.gruppeHinzufuegen()}>add_circle</i>
+                   onClick={() => this.genreHinzufuegen()}>add_circle</i>
               </label>
 
               <dl className="mdc-deprecated-list">
