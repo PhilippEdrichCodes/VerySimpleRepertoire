@@ -1,17 +1,25 @@
 import PropTypes from "prop-types"
 import React from "react"
-import ArtikelTag from "./ArtikelTag"
+import LiedTag from "./LiedTag"
+
+GenreTag.propTypes = {
+  aktiv: PropTypes.bool,
+  aktiveGruppeHandler: PropTypes.func.isRequired,
+  checkHandler: PropTypes.func.isRequired,
+  gekauft: PropTypes.bool.isRequired,
+  gruppe: PropTypes.object.isRequired,
+}
 
 /**
  * Diese Komponente repräsentiert eine Artikelgruppe
  * @component
  * @property {Boolean} aktiv - setzt diese Genre als `aktiveGruppe` in der App.js
  * @property {Function} aktiveGruppeHandler - setzt diese Genre als `aktiveGruppe` in der {@link ../App}
- * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link ArtikelTag} durchgereicht
+ * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link LiedTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Genre in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
  * @property {Genre} gruppe - die darzustellende Genre
  */
-class GruppenTag extends React.Component {
+class GenreTag extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -56,11 +64,11 @@ class GruppenTag extends React.Component {
     let artikelArray = []
     if (this.state.aufgeklappt) {
       for (const artikel of gruppe.liedListe) {
-        if (artikel.gekauft === this.props.gekauft) {
+        if (artikel.geprobt === this.props.gekauft) {
           artikelArray.push(
-            <ArtikelTag artikel={artikel} key={artikel.id}
-                        checkHandler={this.props.checkHandler}
-                        deleteHandler={() => this.artikelEntfernen(artikel.name)}/>)
+            <LiedTag artikel={artikel} key={artikel.id}
+                     checkHandler={this.props.checkHandler}
+                     deleteHandler={() => this.artikelEntfernen(artikel.name)}/>)
         }
       }
     }
@@ -74,12 +82,4 @@ class GruppenTag extends React.Component {
   }
 }
 
-GruppenTag.propTypes = {
-  aktiv: PropTypes.bool,
-  aktiveGruppeHandler: PropTypes.func.isRequired,
-  checkHandler: PropTypes.func.isRequired,
-  gekauft: PropTypes.bool.isRequired,
-  gruppe: PropTypes.object.isRequired,
-
-}
-export default GruppenTag
+export default GenreTag

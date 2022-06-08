@@ -17,7 +17,7 @@ class Repertoire {
     "Absteigend": this.sortiereAbsteigend
   }
   sortierung = Object.keys(this.SORTIERUNGEN)[0]
-  STORAGE_KEY = "einkaufslisteDaten"
+  STORAGE_KEY = "repertoireDaten"
 
   /**
    * Sucht eine Genre nach ihrem Namen und liefert sie als Objekt zurück

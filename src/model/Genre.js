@@ -51,9 +51,9 @@ class Genre {
    */
 
   /*
-  artikelAuflisten (gekauft) {
+  artikelAuflisten (geprobt) {
     for (let artikel of this.liedListe) {
-      if (artikel.gekauft === gekauft) {
+      if (artikel.geprobt === geprobt) {
         console.debug("  " + artikel.name)
       }
     }
@@ -115,6 +115,9 @@ class Genre {
 
   /**
    * Sucht einen Lied anhand des Namens und benennt ihn um.
+   *
+   * wird in Zukunft verwendet werden. Aktuell
+   *
    * @param {String} alterName - Name des zu findenden Artikels
    * @param {String} neuerName - neuer Name des Artikels
    */

@@ -1,6 +1,6 @@
 import React from "react"
+import GenreTag from "./components/GenreTag"
 import GruppenDialog from "./components/GruppenDialog"
-import GruppenTag from "./components/GruppenTag"
 import SortierDialog from "./components/SortierDialog"
 import Modell from "./model/Repertoire"
 
@@ -62,8 +62,8 @@ class App extends React.Component {
    * @param {Lied} artikel - der aktuelle Lied, der gerade abgehakt oder reaktiviert wird
    */
   artikelChecken = (artikel) => {
-    artikel.gekauft = !artikel.gekauft
-    const aktion = (artikel.gekauft) ? "erledigt" : "reaktiviert"
+    artikel.geprobt = !artikel.geprobt
+    const aktion = (artikel.geprobt) ? "erledigt" : "reaktiviert"
     Modell.informieren("[App] Lied \"" + artikel.name + "\" wurde " + aktion)
     this.setState(this.state)
   }
@@ -97,7 +97,7 @@ class App extends React.Component {
     if (this.state.einkaufenAufgeklappt === true) {
       for (const gruppe of Modell.gruppenListe) {
         nochZuKaufen.push(
-          <GruppenTag
+          <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktiveGruppe}
             aktiveGruppeHandler={() => this.setAktiveGruppe(gruppe)}
@@ -112,7 +112,7 @@ class App extends React.Component {
     if (this.state.erledigtAufgeklappt) {
       for (const gruppe of Modell.gruppenListe) {
         schonGekauft.push(
-          <GruppenTag
+          <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktiveGruppe}
             aktiveGruppeHandler={() => this.setAktiveGruppe(gruppe)}

@@ -1,6 +1,6 @@
 import React from "react"
 
-class ArtikelTag extends React.Component {
+class LiedTag extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -20,9 +20,9 @@ class ArtikelTag extends React.Component {
   }
 
   /**
-   * Benennt einen Lied um
+   * Benennt ein Lied um
    * @param {Lied} artikel - der umzubenennende Lied
-   * @param {Event.KEYPRESS} event -
+   * @param {Event.KEYDOWN} event - das auslösende Event
    */
   artikelUmbenennen (artikel, event) {
     if (event && event.key !== "Enter") return
@@ -34,7 +34,7 @@ class ArtikelTag extends React.Component {
   render () {
     const artikel = this.props.artikel
     let artikelName = artikel.name
-    if (artikel.gekauft) {
+    if (artikel.geprobt) {
       artikelName = <s>{artikel.name}</s>
     }
 
@@ -42,11 +42,11 @@ class ArtikelTag extends React.Component {
     const viewTemplate = (
       <dd>
         <label>
-          <input type="checkbox" checked={artikel.gekauft}
+          <input type="checkbox" checked={artikel.geprobt}
                  onChange={() => this.props.checkHandler(artikel)}/>
           {artikelName}
         </label>
-        {!artikel.gekauft ?
+        {!artikel.geprobt ?
           <i className="material-icons"
              onClick={() => this.setState({isEditing: true})}>edit</i>
           : ""
@@ -64,7 +64,7 @@ class ArtikelTag extends React.Component {
         <i className="material-icons"
            onClick={() => this.setState({isEditing: false})}>cancel </i>
         <i className="material-icons"
-           onClick={() => this.artikelUmbenennen(artikel)}>check_circle </i>
+           onClick={event => this.artikelUmbenennen(artikel, event)}>check_circle </i>
       </dd>
     )
 
@@ -76,4 +76,4 @@ class ArtikelTag extends React.Component {
   }
 }
 
-export default ArtikelTag
+export default LiedTag
