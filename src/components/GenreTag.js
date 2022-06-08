@@ -7,8 +7,8 @@ import LiedTag from "./LiedTag"
  *
  * @component Listeneintrag (dt-Tag in dl in section) ToDo: ausformulieren
  *
- * @property {Boolean} aktiv - setzt dieses Genre als `aktiveGruppe` in der App.js
- * @property {Function} aktiveGruppeHandler - setzt dieses Genre als `aktiveGruppe` in der {@link ../App}
+ * @property {Boolean} aktiv - setzt dieses Genre als `aktivesGenre` in der App.js
+ * @property {Function} aktiveGruppeHandler - setzt dieses Genre als `aktivesGenre` in der {@link ../App}
  * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link LiedTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Genre in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
  * @property {Genre} gruppe - das darzustellende Genre

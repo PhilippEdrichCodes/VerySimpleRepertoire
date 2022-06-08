@@ -9,7 +9,7 @@ import Genre from "./Genre.js"
  */
 class Repertoire {
   genreListe = []
-  aktiveGruppe = null
+  aktivesGenre = null
   meldungenAusgeben = true
   SORTIERUNGEN = {
     "Eigene Reihenfolge": this.sortiereIndex,
@@ -173,7 +173,7 @@ class Repertoire {
   speichern (daten = this) {
     const json = {
       gruppenListe: this.genreListe,
-      aktiveGruppeName: this.aktiveGruppe?.name,
+      aktiveGruppeName: this.aktivesGenre?.name,
     }
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(json))
   }
@@ -205,7 +205,7 @@ class Repertoire {
       }
     }
     if (jsonDaten.aktiveGruppeName) {
-      this.aktiveGruppe = this.gruppeFinden(jsonDaten.aktiveGruppeName)
+      this.aktivesGenre = this.gruppeFinden(jsonDaten.aktiveGruppeName)
     }
   }
 }

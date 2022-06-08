@@ -33,7 +33,7 @@ class App extends React.Component {
     erledigtAufgeklappt = (erledigtAufgeklappt == null) ? false : JSON.parse(erledigtAufgeklappt)
 
     this.setState({
-      aktiveGruppe: Modell.aktiveGruppe,
+      aktiveGruppe: Modell.aktivesGenre,
       einkaufenAufgeklappt: einkaufenAufgeklappt,
       erledigtAufgeklappt: erledigtAufgeklappt
     })
@@ -72,7 +72,7 @@ class App extends React.Component {
     const eingabe = document.getElementById("artikelEingabe")
     const artikelName = eingabe.value.trim()
     if (artikelName.length > 0) {
-      Modell.aktiveGruppe.liedHinzufuegen(artikelName)
+      Modell.aktivesGenre.liedHinzufuegen(artikelName)
       this.setState(this.state)
     }
     eingabe.value = ""
@@ -80,9 +80,9 @@ class App extends React.Component {
   }
 
   setAktiveGruppe (gruppe) {
-    Modell.aktiveGruppe = gruppe
+    Modell.aktivesGenre = gruppe
     Modell.informieren("[App] Genre \"" + gruppe.name + "\" ist nun aktiv")
-    this.setState({aktiveGruppe: Modell.aktiveGruppe})
+    this.setState({aktiveGruppe: Modell.aktivesGenre})
   }
 
   closeSortierDialog = (reihenfolge, sortieren) => {
@@ -99,7 +99,7 @@ class App extends React.Component {
         nochZuKaufen.push(
           <GenreTag
             key={gruppe.id}
-            aktiv={gruppe === this.state.aktiveGruppe}
+            aktiv={gruppe === this.state.aktivesGenre}
             aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
             checkHandler={this.artikelChecken}
             geprobt={false}
@@ -114,7 +114,7 @@ class App extends React.Component {
         schonGekauft.push(
           <GenreTag
             key={gruppe.id}
-            aktiv={gruppe === this.state.aktiveGruppe}
+            aktiv={gruppe === this.state.aktivesGenre}
             aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
             checkHandler={this.artikelChecken}
             geprobt={true}
