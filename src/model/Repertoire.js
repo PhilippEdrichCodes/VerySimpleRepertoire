@@ -1,10 +1,10 @@
-import Gruppe from "./Gruppe.js"
+import Genre from "./Genre.js"
 
 /**
  * Diese Klasse steuert das Modell der App
  *
- * @property {Gruppe[]} gruppenListe      - enthält die Artikelgruppen
- * @property {Gruppe}   aktiveGruppe      - enthält die aktuell ausgewählte Gruppe
+ * @property {Genre[]} gruppenListe      - enthält die Artikelgruppen
+ * @property {Genre}   aktiveGruppe      - enthält die aktuell ausgewählte Genre
  * @property {boolean}  meldungenAusgeben - steuert, ob eine Meldung ausgegeben werden soll oder nicht
  */
 class Repertoire {
@@ -20,10 +20,10 @@ class Repertoire {
   STORAGE_KEY = "einkaufslisteDaten"
 
   /**
-   * Sucht eine Gruppe nach ihrem Namen und liefert sie als Objekt zurück
-   * @param {String} suchName - Name der gesuchten Gruppe
+   * Sucht eine Genre nach ihrem Namen und liefert sie als Objekt zurück
+   * @param {String} suchName - Name der gesuchten Genre
    * @param {Boolean} meldungAusgeben - steuert, ob eine Meldung ausgegeben wird
-   * @returns {Gruppe | null} gefundeneGruppe - die gefundene Gruppe; `null`, wenn nichts gefunden wurde
+   * @returns {Genre | null} gefundeneGruppe - die gefundene Genre; `null`, wenn nichts gefunden wurde
    */
   gruppeFinden (suchName, meldungAusgeben = false) {
     for (let gruppe of this.gruppenListe) {
@@ -33,54 +33,54 @@ class Repertoire {
     }
     // nichts gefunden, meldung ausgeben
     if (meldungAusgeben) {
-      this.informieren("[App] Gruppe \"" + suchName + "\" nicht gefunden", true)
+      this.informieren("[App] Genre \"" + suchName + "\" nicht gefunden", true)
     }
     return null
   }
 
   /**
-   * Fügt eine Gruppe in der Gruppenliste hinzu
-   * @param {String} name - Name der neuen Gruppe
-   * @returns {Gruppe} neueGruppe - die neu hinzugefügte Gruppe
+   * Fügt eine Genre in der Gruppenliste hinzu
+   * @param {String} name - Name der neuen Genre
+   * @returns {Genre} neueGruppe - die neu hinzugefügte Genre
    */
   gruppeHinzufuegen (name) {
     let vorhandeneGruppe = this.gruppeFinden(name)
     if (!vorhandeneGruppe) {
-      let neueGruppe = new Gruppe(name, this.gruppenListe.length)
+      let neueGruppe = new Genre(name, this.gruppenListe.length)
       this.gruppenListe.push(neueGruppe)
-      this.informieren("[App] Gruppe \"" + name + "\" hinzugefügt")
+      this.informieren("[App] Genre \"" + name + "\" hinzugefügt")
       return neueGruppe
     } else {
-      this.informieren("[App] Gruppe \"" + name + "\" existiert schon!", true)
+      this.informieren("[App] Genre \"" + name + "\" existiert schon!", true)
     }
   }
 
   /**
-   * Entfernt die Gruppe mit dem `name`
-   * @param {String} name - Name der zu löschenden Gruppe
+   * Entfernt die Genre mit dem `name`
+   * @param {String} name - Name der zu löschenden Genre
    */
   gruppeEntfernen (name) {
     let loeschGruppe = this.gruppeFinden(name)
     if (loeschGruppe) {
       let index = this.gruppenListe.indexOf(loeschGruppe)
       this.gruppenListe.splice(index, 1)
-      this.informieren("[App] Gruppe \"" + name + "\" entfernt"
+      this.informieren("[App] Genre \"" + name + "\" entfernt"
       )
     } else {
-      this.informieren("[App] Gruppe \"" + name + "\" konnte NICHT entfernt werden!", true)
+      this.informieren("[App] Genre \"" + name + "\" konnte NICHT entfernt werden!", true)
     }
   }
 
   /**
-   * Benennt die Gruppe `alterName` um
-   * @param {String} alterName - Name der umzubenennenden Gruppe
-   * @param {String} neuerName - der neue Name der Gruppe
+   * Benennt die Genre `alterName` um
+   * @param {String} alterName - Name der umzubenennenden Genre
+   * @param {String} neuerName - der neue Name der Genre
    */
   gruppeUmbenennen (alterName, neuerName) {
     let suchGruppe = this.gruppeFinden(alterName, true)
     if (suchGruppe) {
       suchGruppe.name = neuerName
-      this.informieren("[App] Gruppe \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
+      this.informieren("[App] Genre \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
     }
   }
 
@@ -125,7 +125,7 @@ class Repertoire {
     // sortiere zuerst die Gruppen
     this.gruppenListe.sort(sortierFunktion)
 
-    // sortiere danach die Lied jeder Gruppe
+    // sortiere danach die Lied jeder Genre
     for (let gruppe of this.gruppenListe) {
       gruppe.artikelListe.sort(sortierFunktion)
     }
@@ -134,8 +134,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente alphabetisch aufsteigend nach dem Namen
-   * @param {Gruppe|Lied} a - erstes Element
-   * @param {Gruppe|Lied} b - zweites Element
+   * @param {Genre|Lied} a - erstes Element
+   * @param {Genre|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAufsteigend (a, b) {
@@ -146,8 +146,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente alphabetisch absteigend nach dem Namen
-   * @param {Gruppe|Lied} a - erstes Element
-   * @param {Gruppe|Lied} b - zweites Element
+   * @param {Genre|Lied} a - erstes Element
+   * @param {Genre|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereAbsteigend (a, b) {
@@ -158,8 +158,8 @@ class Repertoire {
 
   /**
    * Sortiert Elemente aufsteigend nach dem ursprünglichen Index
-   * @param {Gruppe|Lied} a - erstes Element
-   * @param {Gruppe|Lied} b - zweites Element
+   * @param {Genre|Lied} a - erstes Element
+   * @param {Genre|Lied} b - zweites Element
    * @returns {Number} - wenn kleiner: -1, wenn gleich: 0, wenn größer: +1
    */
   sortiereIndex (a, b) {

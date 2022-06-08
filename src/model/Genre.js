@@ -5,12 +5,12 @@ import Modell from "./Repertoire.js"
  * Klasse zum Gruppieren der Lied
  *
  * @property {Number}    counter      - dient zur Erzeugung eindeutiger Gruppen-IDs
- * @property {Number}    id           - eindeutige ID-Nummer der Gruppe
- * @property {Number}    index        - Position der Gruppe innerhalb der Gruppenliste
- * @property {String}    name         - Name der Gruppe
- * @property {Lied[]} artikelListe - Liste der Lied in dieser Gruppe
+ * @property {Number}    id           - eindeutige ID-Nummer der Genre
+ * @property {Number}    index        - Position der Genre innerhalb der Gruppenliste
+ * @property {String}    name         - Name der Genre
+ * @property {Lied[]} artikelListe - Liste der Lied in dieser Genre
  */
-class Gruppe {
+class Genre {
   static counter = 1
   id
   index
@@ -18,7 +18,7 @@ class Gruppe {
   artikelListe
 
   constructor (name, index) {
-    this.id = Gruppe.counter++
+    this.id = Genre.counter++
     this.name = name
     this.index = index
     this.artikelListe = []
@@ -43,7 +43,7 @@ class Gruppe {
   }
 
   /**
-   * Listet die Lied in dieser Gruppe in der Konsole auf
+   * Listet die Lied in dieser Genre in der Konsole auf
    * @param {Boolean} gekauft - steuert die Anzeige der gekauften oder noch zu kaufenden Lied
    */
   artikelAuflisten (gekauft) {
@@ -123,4 +123,4 @@ class Gruppe {
   }
 }
 
-export default Gruppe
+export default Genre

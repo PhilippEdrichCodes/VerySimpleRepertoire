@@ -81,7 +81,7 @@ class App extends React.Component {
 
   setAktiveGruppe (gruppe) {
     Modell.aktiveGruppe = gruppe
-    Modell.informieren("[App] Gruppe \"" + gruppe.name + "\" ist nun aktiv")
+    Modell.informieren("[App] Genre \"" + gruppe.name + "\" ist nun aktiv")
     this.setState({aktiveGruppe: Modell.aktiveGruppe})
   }
 
