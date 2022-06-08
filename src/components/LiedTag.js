@@ -32,21 +32,21 @@ class LiedTag extends React.Component {
   }
 
   render () {
-    const artikel = this.props.artikel
-    let artikelName = artikel.name
-    if (artikel.geprobt) {
-      artikelName = <s>{artikel.name}</s>
+    const lied = this.props.lied
+    let liedName = lied.name
+    if (lied.geprobt) {
+      liedName = lied.name
     }
 
     // erlaubt das abhaken und reaktivieren
     const viewTemplate = (
       <dd>
         <label>
-          <input type="checkbox" checked={artikel.geprobt}
-                 onChange={() => this.props.checkHandler(artikel)}/>
-          {artikelName}
+          <input type="checkbox" checked={lied.geprobt}
+                 onChange={() => this.props.checkHandler(lied)}/>
+          {liedName}
         </label>
-        {!artikel.geprobt ?
+        {!lied.geprobt ?
           <i className="material-icons"
              onClick={() => this.setState({isEditing: true})}>edit</i>
           : ""
@@ -60,11 +60,11 @@ class LiedTag extends React.Component {
       <dd>
         <input type="search" value={this.state.newName} autoFocus={true}
                onChange={event => this.handleChange(event)}
-               onKeyDown={event => this.artikelUmbenennen(artikel, event)}/>
+               onKeyDown={event => this.artikelUmbenennen(lied, event)}/>
         <i className="material-icons"
            onClick={() => this.setState({isEditing: false})}>cancel </i>
         <i className="material-icons"
-           onClick={event => this.artikelUmbenennen(artikel, event)}>check_circle </i>
+           onClick={event => this.artikelUmbenennen(lied, event)}>check_circle </i>
       </dd>
     )
 

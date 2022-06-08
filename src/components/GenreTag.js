@@ -5,13 +5,13 @@ import LiedTag from "./LiedTag"
 /**
  * Diese Komponente repräsentiert ein Genre und implementiert das JSX zur Anzeige in der App
  *
- * @component Listeneintrag (dt-Tag in dl in section)
+ * @component Listeneintrag (dt-Tag in dl in section) ToDo: ausformulieren
  *
  * @property {Boolean} aktiv - setzt dieses Genre als `aktiveGruppe` in der App.js
- * @property {Function} aktiveGruppeHandler - setzt diese Genre als `aktiveGruppe` in der {@link ../App}
+ * @property {Function} aktiveGruppeHandler - setzt dieses Genre als `aktiveGruppe` in der {@link ../App}
  * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link LiedTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Genre in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
- * @property {Genre} gruppe - die darzustellende Genre
+ * @property {Genre} gruppe - das darzustellende Genre
  */
 class GenreTag extends React.Component {
   constructor (props) {
@@ -37,13 +37,13 @@ class GenreTag extends React.Component {
 
   aufZuKlappen () {
     const neuerZustand = !this.state.aufgeklappt
-    localStorage.setItem("genre-" + this.props.genre.id, neuerZustand)
+    localStorage.setItem("genre-" + this.props.genre.id, neuerZustand.toString())
     this.setState({aufgeklappt: !this.state.aufgeklappt})
   }
 
   render () {
     const genre = this.props.genre
-    
+
     let genreHeader = (
       <dt className={this.props.aktiv ? "aktiv" : "inaktiv"}
           onClick={() => this.props.aktivesGenreHandler(genre)}>
@@ -56,13 +56,13 @@ class GenreTag extends React.Component {
 
     let liedArray = []
     if (this.state.aufgeklappt) {
-      for (const artikel of genre.liedListe) {
-        if (artikel.geprobt === this.props.geprobt) {
+      for (const lied of genre.liedListe) {
+        if (lied.geprobt === this.props.geprobt) {
           liedArray.push(
-            <LiedTag artikel={artikel} key={artikel.id}
+            <LiedTag lied={lied} key={lied.id}
                      genre={genre}
                      checkHandler={this.props.checkHandler}
-                     deleteHandler={() => this.artikelEntfernen(artikel.name)}/>)
+                     deleteHandler={() => this.artikelEntfernen(lied.name)}/>)
         }
       }
     }
