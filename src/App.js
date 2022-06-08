@@ -17,7 +17,7 @@ class App extends React.Component {
     this.state = {
       aktivesGenre: null,
       showGruppenDialog: false,
-      showSortierDialog: false,
+      showSortierenDialog: false,
       imSetAufgeklappt: true,
       geprobtAufgeklappt: false
     }
@@ -131,7 +131,7 @@ class App extends React.Component {
     }
 
     let sortierDialog = ""
-    if (this.state.showSortierDialog) {
+    if (this.state.showSortierenDialog) {
       sortierDialog = <SortierDialog onDialogClose={this.closeSortierDialog}/>
     }
 

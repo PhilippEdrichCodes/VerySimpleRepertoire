@@ -116,18 +116,18 @@ class Repertoire {
   }
 
   /**
-   * Sortiert Gruppen und Lied nach der übergebenen `reihenfolge`
+   * Sortiert Gruppen und Lieder nach der übergebenen `reihenfolge`
    * @param {String} reihenfolge - entspricht einem der Keys aus {@link SORTIERUNGEN}
    */
   sortieren (reihenfolge) {
     this.sortierung = reihenfolge
-    const sortierFunktion = this.SORTIERUNGEN[reihenfolge]
-    // sortiere zuerst die Gruppen
-    this.genreListe.sort(sortierFunktion)
+    const sortierenFunktion = this.SORTIERUNGEN[reihenfolge]
+    // sortiere zuerst die Genres
+    this.genreListe.sort(sortierenFunktion)
 
-    // sortiere danach die Lied jeder Genre
-    for (let gruppe of this.genreListe) {
-      gruppe.liedListe.sort(sortierFunktion)
+    // sortiere danach die Lieder jedes Genres
+    for (let genre of this.genreListe) {
+      genre.liedListe.sort(sortierenFunktion)
     }
     this.informieren("[App] nach \"" + reihenfolge + "\" sortiert")
   }
@@ -172,8 +172,8 @@ class Repertoire {
    */
   speichern (daten = this) {
     const json = {
-      gruppenListe: this.genreListe,
-      aktiveGruppeName: this.aktivesGenre?.name,
+      genreListe: this.genreListe,
+      aktivesGenreName: this.aktivesGenre?.name,
     }
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(json))
   }
@@ -204,8 +204,8 @@ class Repertoire {
         neueGruppe.liedAusJSONHinzufuegen(artikel)
       }
     }
-    if (jsonDaten.aktiveGruppeName) {
-      this.aktivesGenre = this.genreFinden(jsonDaten.aktiveGruppeName)
+    if (jsonDaten.aktivesGenreName) {
+      this.aktivesGenre = this.genreFinden(jsonDaten.aktivesGenreName)
     }
   }
 }
