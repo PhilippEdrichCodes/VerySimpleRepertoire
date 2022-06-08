@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import React from "react"
 
 class LiedTag extends React.Component {
@@ -7,7 +8,7 @@ class LiedTag extends React.Component {
       // schaltet den Edit-Mode um
       isEditing: false,
       // enthält den neuen Namen im Edit-Mode
-      newName: this.props.artikel.name
+      newName: this.props.lied.name
     }
   }
 
@@ -17,6 +18,7 @@ class LiedTag extends React.Component {
    */
   handleChange (event) {
     this.setState({newName: event.target.value})
+
   }
 
   /**
@@ -76,6 +78,11 @@ class LiedTag extends React.Component {
   }
 }
 
-LiedTag.propTypes = {}
+LiedTag.propTypes = {
+  lied: PropTypes.object.isRequired,
+  genre: PropTypes.object.isRequired,
+  checkHandler: PropTypes.func.isRequired,
+  deleteHandler: PropTypes.func.isRequired,
+}
 
 export default LiedTag

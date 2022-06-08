@@ -122,6 +122,7 @@ class Genre {
    * @param {String} alterName - Name des zu findenden Lieds
    * @param {String} neuerName - neuer Name des Lieds
    */
+  /*
   liedUmbenennen (alterName, neuerName) {
     let vorhandenerArtikel = this.liedFinden(alterName)
     if (vorhandenerArtikel) {
@@ -129,6 +130,7 @@ class Genre {
     }
     Modell.informieren("[" + this.name + "] Lied \"" + alterName + "\" umbenannt in \"" + neuerName + "\"")
   }
+   */
 }
 
 export default Genre
