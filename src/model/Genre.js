@@ -2,13 +2,14 @@ import Lied from "./Lied.js"
 import Modell from "./Repertoire.js"
 
 /**
+ * Repräsentiert das Genre der Lieder
  * Klasse zum Gruppieren der Lieder
  *
  * @property {Number}    counter      - dient zur Erzeugung eindeutiger Gruppen-IDs
  * @property {Number}    id           - eindeutige ID-Nummer der Genre
  * @property {Number}    index        - Position der Genres innerhalb der Gruppenliste
  * @property {String}    name         - Name der Genre
- * @property {Lied[]} artikelListe - Liste der Lieder in diesem Genre
+ * @property {Lied[]} liedListe        - Liste der Lieder in diesem Genre
  */
 class Genre {
   static counter = 1
@@ -78,26 +79,26 @@ class Genre {
   }
 
   /**
-   * Erzeugt einen neuen Lied aus einem eingelesenen JSON-Objekt.
+   * Erzeugt ein neues Lied aus einem eingelesenen JSON-Objekt.
    * Wird von {@link Modell.initialisieren()} verwendet.
-   * @param {object} artikel - das übergebene JSON-Objekt
+   * @param {object} lied - das übergebene JSON-Objekt
    */
-  artikelObjektHinzufuegen (artikel) {
-    let neuerArtikel = this.liedHinzufuegen(artikel.name)
-    // kopiert alle Properties aus "artikel" nach "neuerArtikel"
-    Object.assign(neuerArtikel, artikel)
+  liedAusJSONHinzufuegen (lied) {
+    let neuesLied = this.liedHinzufuegen(lied.name)
+    // kopiert alle Properties aus "lied" nach "neuesLied"
+    Object.assign(neuesLied, lied)
   }
 
   /**
-   * Entfernt einen Lied aus der ArtikelListe
-   * @param {String} name - Index des zu entfernenden Artikels
+   * Löscht ein Lied aus der Liederliste
+   * @param {String} name - Name des zu löschenden Lieds
    */
-  artikelEntfernen (name) {
-    let loeschArtikel = this.liedFinden(name)
-    if (loeschArtikel) {
-      const index = this.liedListe.indexOf(loeschArtikel)
+  liedLoeschen (name) {
+    let loeschLied = this.liedFinden(name)
+    if (loeschLied) {
+      const index = this.liedListe.indexOf(loeschLied)
       this.liedListe.splice(index, 1)
-      this.artikelNeuNummerieren()
+      this.indizesNeuNummerieren()
       Modell.informieren("[" + this.name + "] Lied \"" + name + "\" entfernt")
     } else {
       Modell.informieren("[" + this.name + "] Lied \"" + name + "\" konnte NICHT entfernt werden", true)
@@ -105,9 +106,9 @@ class Genre {
   }
 
   /**
-   * Nummeriert alle Lied in der Lied-Liste neu durch
+   * Nummeriert alle Lieder in der Liederliste neu durch
    */
-  artikelNeuNummerieren () {
+  indizesNeuNummerieren () {
     for (let i = 0; i < this.liedListe.length; i++) {
       this.liedListe[i].index = i
     }
@@ -116,12 +117,12 @@ class Genre {
   /**
    * Sucht einen Lied anhand des Namens und benennt ihn um.
    *
-   * wird in Zukunft verwendet werden. Aktuell
+   * wird in Zukunft verwendet werden. Aktuell wird {@link LiedTag.liedUmbenennen} verwendet
    *
-   * @param {String} alterName - Name des zu findenden Artikels
-   * @param {String} neuerName - neuer Name des Artikels
+   * @param {String} alterName - Name des zu findenden Lieds
+   * @param {String} neuerName - neuer Name des Lieds
    */
-  artikelUmbenennen (alterName, neuerName) {
+  liedUmbenennen (alterName, neuerName) {
     let vorhandenerArtikel = this.liedFinden(alterName)
     if (vorhandenerArtikel) {
       vorhandenerArtikel.name = neuerName

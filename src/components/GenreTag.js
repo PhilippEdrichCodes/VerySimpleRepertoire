@@ -36,7 +36,7 @@ class GenreTag extends React.Component {
   artikelEntfernen (name) {
 
     if (window.confirm("Wollen Sie diesen Eintrag wirklich löschen?!")) {
-      this.props.gruppe.artikelEntfernen(name)
+      this.props.gruppe.liedLoeschen(name)
     }
     this.props.aktiveGruppeHandler(this.props.gruppe)
   }

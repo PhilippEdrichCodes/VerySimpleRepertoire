@@ -201,7 +201,7 @@ class Repertoire {
     for (let gruppe of jsonDaten.gruppenListe) {
       let neueGruppe = this.gruppeHinzufuegen(gruppe.name)
       for (let artikel of gruppe.liedListe) {
-        neueGruppe.artikelObjektHinzufuegen(artikel)
+        neueGruppe.liedAusJSONHinzufuegen(artikel)
       }
     }
     if (jsonDaten.aktiveGruppeName) {

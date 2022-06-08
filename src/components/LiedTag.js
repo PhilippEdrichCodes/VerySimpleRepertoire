@@ -26,7 +26,7 @@ class LiedTag extends React.Component {
    */
   artikelUmbenennen (artikel, event) {
     if (event && event.key !== "Enter") return
-    // ToDo: Modell.aktuelleGruppe.artikelUmbenennen() verwenden
+    // ToDo: Modell.aktuelleGruppe.liedUmbenennen() verwenden
     artikel.name = this.state.newName
     this.setState({isEditing: false})
   }

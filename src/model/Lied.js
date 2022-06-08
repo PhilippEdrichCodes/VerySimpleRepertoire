@@ -1,9 +1,9 @@
 /**
- * Klasse zum Beschreiben eines Lieds
+ * Klasse zur Repräsentation eines Lieds
  *
  * @property {Number}  counter - dient zur Erzeugung eindeutiger Lied-IDs
  * @property {Number}  id      - eindeutige ID-Nummer des Artikels
- * @property {Number}  index   - Position des Artikels innerhalb der Artikelliste
+ * @property {Number}  index   - Position des Artikels innerhalb der Liederliste
  * @property {String}  name    - Name des Artikels
  * @property {Boolean} geprobt - merkt sich, ob das Lied bereits geprobt wurde
  */
