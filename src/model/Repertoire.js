@@ -100,7 +100,7 @@ class Repertoire {
   } */
 
   /**
-   * Gibt eine Meldung aus und speichert den aktuellen Zustand im LocalStorage
+   * Gibt eine Meldung aus und speichert den aktuellen Zustand im LocalStorage, wenn keine Warnung vorliegt
    * @param {String} nachricht - die auszugebende Nachricht
    * @param {boolean} istWarnung - steuert, ob die {@link nachricht} als Warnung ausgegeben wird
    */
