@@ -76,4 +76,6 @@ class LiedTag extends React.Component {
   }
 }
 
+LiedTag.propTypes = {}
+
 export default LiedTag

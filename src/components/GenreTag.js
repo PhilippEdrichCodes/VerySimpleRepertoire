@@ -2,18 +2,12 @@ import PropTypes from "prop-types"
 import React from "react"
 import LiedTag from "./LiedTag"
 
-GenreTag.propTypes = {
-  aktiv: PropTypes.bool,
-  aktiveGruppeHandler: PropTypes.func.isRequired,
-  checkHandler: PropTypes.func.isRequired,
-  gekauft: PropTypes.bool.isRequired,
-  gruppe: PropTypes.object.isRequired,
-}
-
 /**
- * Diese Komponente repräsentiert eine Artikelgruppe
- * @component
- * @property {Boolean} aktiv - setzt diese Genre als `aktiveGruppe` in der App.js
+ * Diese Komponente repräsentiert ein Genre und implementiert das JSX zur Anzeige in der App
+ *
+ * @component Listeneintrag (dt-Tag in dl in section)
+ *
+ * @property {Boolean} aktiv - setzt dieses Genre als `aktiveGruppe` in der App.js
  * @property {Function} aktiveGruppeHandler - setzt diese Genre als `aktiveGruppe` in der {@link ../App}
  * @property {Function} checkHandler - erledigt und reaktiviert Lied; wird an den {@link LiedTag} durchgereicht
  * @property {Boolean} gekauft - steuert, ob diese Genre in der "Gekauft-" oder "NochZuKaufen-Liste" erscheint
@@ -28,7 +22,7 @@ class GenreTag extends React.Component {
   }
 
   componentDidMount () {
-    let aufgeklappt = localStorage.getItem("gruppe-" + this.props.gruppe.id)
+    let aufgeklappt = localStorage.getItem("genre-" + this.props.genre.id)
     aufgeklappt = (aufgeklappt == null) ? true : JSON.parse(aufgeklappt)
     this.setState({aufgeklappt: aufgeklappt})
   }
@@ -36,37 +30,37 @@ class GenreTag extends React.Component {
   artikelEntfernen (name) {
 
     if (window.confirm("Wollen Sie diesen Eintrag wirklich löschen?!")) {
-      this.props.gruppe.liedLoeschen(name)
+      this.props.genre.liedLoeschen(name)
     }
-    this.props.aktiveGruppeHandler(this.props.gruppe)
+    this.props.aktivesGenreHandler(this.props.genre)
   }
 
   aufZuKlappen () {
     const neuerZustand = !this.state.aufgeklappt
-    localStorage.setItem("gruppe-" + this.props.gruppe.id, neuerZustand)
+    localStorage.setItem("genre-" + this.props.genre.id, neuerZustand)
     this.setState({aufgeklappt: !this.state.aufgeklappt})
   }
 
   render () {
-    const gruppe = this.props.gruppe
-
-    let gruppenHeader = ""
-    gruppenHeader = (
+    const genre = this.props.genre
+    
+    let genreHeader = (
       <dt className={this.props.aktiv ? "aktiv" : "inaktiv"}
-          onClick={() => this.props.aktiveGruppeHandler(gruppe)}>
-        <span>{gruppe.name}</span>
+          onClick={() => this.props.aktivesGenreHandler(genre)}>
+        <span>{genre.name}</span>
         <i className="material-icons"
            onClick={() => this.aufZuKlappen()}>
           {this.state.aufgeklappt ? "expand_more" : "expand_less"}
         </i>
       </dt>)
 
-    let artikelArray = []
+    let liedArray = []
     if (this.state.aufgeklappt) {
-      for (const artikel of gruppe.liedListe) {
-        if (artikel.geprobt === this.props.gekauft) {
-          artikelArray.push(
+      for (const artikel of genre.liedListe) {
+        if (artikel.geprobt === this.props.geprobt) {
+          liedArray.push(
             <LiedTag artikel={artikel} key={artikel.id}
+                     genre={genre}
                      checkHandler={this.props.checkHandler}
                      deleteHandler={() => this.artikelEntfernen(artikel.name)}/>)
         }
@@ -75,11 +69,19 @@ class GenreTag extends React.Component {
 
     return (
       <React.Fragment>
-        {gruppenHeader}
-        {artikelArray}
+        {genreHeader}
+        {liedArray}
       </React.Fragment>
     )
   }
+}
+
+GenreTag.propTypes = {
+  aktiv: PropTypes.bool,
+  aktivesGenreHandler: PropTypes.func.isRequired,
+  checkHandler: PropTypes.func.isRequired,
+  geprobt: PropTypes.bool.isRequired,
+  genre: PropTypes.object.isRequired,
 }
 
 export default GenreTag

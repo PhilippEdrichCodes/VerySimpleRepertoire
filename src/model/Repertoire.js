@@ -93,9 +93,9 @@ class Repertoire {
   /* allesAuflisten () {
     console.debug("Einkaufsliste")
     console.debug("--------------------")
-    for (const gruppe of this.gruppenListe) {
-      console.debug("[" + gruppe.name + "]")
-      gruppe.artikelAuflisten(false)
+    for (const genre of this.gruppenListe) {
+      console.debug("[" + genre.name + "]")
+      genre.artikelAuflisten(false)
     }
   } */
 

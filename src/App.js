@@ -100,10 +100,10 @@ class App extends React.Component {
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktiveGruppe}
-            aktiveGruppeHandler={() => this.setAktiveGruppe(gruppe)}
+            aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
             checkHandler={this.artikelChecken}
-            gekauft={false}
-            gruppe={gruppe}
+            geprobt={false}
+            genre={gruppe}
           />)
       }
     }
@@ -115,10 +115,10 @@ class App extends React.Component {
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktiveGruppe}
-            aktiveGruppeHandler={() => this.setAktiveGruppe(gruppe)}
+            aktivesGenreHandler={() => this.setAktiveGruppe(gruppe)}
             checkHandler={this.artikelChecken}
-            gekauft={true}
-            gruppe={gruppe}
+            geprobt={true}
+            genre={gruppe}
           />)
       }
     }
