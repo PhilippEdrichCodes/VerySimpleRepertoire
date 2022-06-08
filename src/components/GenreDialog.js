@@ -2,7 +2,7 @@ import React from "react"
 import Modell from "../model/Repertoire"
 import GruppeBearbeitenTag from "./GruppeBearbeitenTag"
 
-class GruppenDialog extends React.Component {
+class GenreDialog extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -79,4 +79,4 @@ class GruppenDialog extends React.Component {
   }
 }
 
-export default GruppenDialog
+export default GenreDialog

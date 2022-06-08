@@ -1,6 +1,6 @@
 import React from "react"
+import GenreDialog from "./components/GenreDialog"
 import GenreTag from "./components/GenreTag"
-import GruppenDialog from "./components/GruppenDialog"
 import SortierDialog from "./components/SortierDialog"
 import Modell from "./model/Repertoire"
 
@@ -125,7 +125,7 @@ class App extends React.Component {
 
     let gruppenDialog = ""
     if (this.state.showGruppenDialog) {
-      gruppenDialog = <GruppenDialog
+      gruppenDialog = <GenreDialog
         genreListe={Modell.genreListe}
         onDialogClose={() => this.setState({showGruppenDialog: false})}/>
     }
