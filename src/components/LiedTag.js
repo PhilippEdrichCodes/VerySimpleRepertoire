@@ -1,6 +1,15 @@
 import PropTypes from "prop-types"
 import React from "react"
 
+/**
+ * Diese Komponente repräsentiert ein Lied und implementiert das JSX zur Anzeige in der App
+ *
+ * @component Listeneintrag (dd-Tag in dl in section) ToDo: ausformulieren
+ * @property {Lied} lied -
+ * @property {Genre} genre -
+ * @property {Function} checkHandler - der Event-Handler fürs Abhaken und Reaktivieren, durchgereicht über GenreTag aus der App
+ * @property {Function} deleteHandler - der Event-Handler fürs Löschen des Eintrags
+ */
 class LiedTag extends React.Component {
   constructor (props) {
     super(props)
@@ -13,7 +22,7 @@ class LiedTag extends React.Component {
   }
 
   /**
-   * Reagiert auf Änderungen im Eingabefeld und speichert den neuen Wert im newName-state
+   * Reagiert auf Änderungen im Eingabefeld und speichert den neuen Wert in this.state.newName
    * @param {Event.CHANGE} event - das Change-Event im Eingabefeld
    */
   handleChange (event) {
@@ -23,13 +32,13 @@ class LiedTag extends React.Component {
 
   /**
    * Benennt ein Lied um
-   * @param {Lied} artikel - der umzubenennende Lied
+   * @param {Lied} lied - der umzubenennende Lied
    * @param {Event.KEYDOWN} event - das auslösende Event
    */
-  artikelUmbenennen (artikel, event) {
+  artikelUmbenennen (lied, event) {
     if (event && event.key !== "Enter") return
     // ToDo: Modell.aktuelleGruppe.liedUmbenennen() verwenden
-    artikel.name = this.state.newName
+    lied.name = this.state.newName
     this.setState({isEditing: false})
   }
 
