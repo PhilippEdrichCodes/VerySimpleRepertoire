@@ -126,7 +126,7 @@ class App extends React.Component {
     let gruppenDialog = ""
     if (this.state.showGruppenDialog) {
       gruppenDialog = <GruppenDialog
-        gruppenListe={Modell.genreListe}
+        genreListe={Modell.genreListe}
         onDialogClose={() => this.setState({showGruppenDialog: false})}/>
     }
 

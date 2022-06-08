@@ -6,7 +6,7 @@ class GruppenDialog extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      gruppenListe: this.props.genreListe
+      genreListe: this.props.genreListe
     }
   }
 
@@ -27,12 +27,12 @@ class GruppenDialog extends React.Component {
   }
 
   render () {
-    const gruppenListe = []
+    const genreListe = []
     for (let gruppe of this.state.genreListe) {
-      gruppenListe.push(
+      genreListe.push(
         <GruppeBearbeitenTag
           key={gruppe.id}
-          gruppe={gruppe}
+          genre={gruppe}
           entfernenHandler={() => this.gruppeEntfernen(gruppe.name)}/>
       )
     }
@@ -61,7 +61,7 @@ class GruppenDialog extends React.Component {
               </label>
 
               <dl className="mdc-deprecated-list">
-                {gruppenListe}
+                {genreListe}
               </dl>
             </div>
             <div className="mdc-dialog__actions">

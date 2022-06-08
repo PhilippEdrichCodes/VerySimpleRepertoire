@@ -6,7 +6,7 @@ class GruppeBearbeitenTag extends React.Component {
     super(props)
     this.state = {
       isEditing: false,
-      newName: this.props.gruppe.name
+      newName: this.props.genre.name
     }
   }
 
