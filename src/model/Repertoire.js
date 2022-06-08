@@ -127,7 +127,7 @@ class Repertoire {
 
     // sortiere danach die Lied jeder Genre
     for (let gruppe of this.gruppenListe) {
-      gruppe.artikelListe.sort(sortierFunktion)
+      gruppe.liedListe.sort(sortierFunktion)
     }
     this.informieren("[App] nach \"" + reihenfolge + "\" sortiert")
   }
@@ -200,7 +200,7 @@ class Repertoire {
     this.gruppenListe = []
     for (let gruppe of jsonDaten.gruppenListe) {
       let neueGruppe = this.gruppeHinzufuegen(gruppe.name)
-      for (let artikel of gruppe.artikelListe) {
+      for (let artikel of gruppe.liedListe) {
         neueGruppe.artikelObjektHinzufuegen(artikel)
       }
     }

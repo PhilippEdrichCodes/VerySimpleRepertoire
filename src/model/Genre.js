@@ -2,38 +2,38 @@ import Lied from "./Lied.js"
 import Modell from "./Repertoire.js"
 
 /**
- * Klasse zum Gruppieren der Lied
+ * Klasse zum Gruppieren der Lieder
  *
  * @property {Number}    counter      - dient zur Erzeugung eindeutiger Gruppen-IDs
  * @property {Number}    id           - eindeutige ID-Nummer der Genre
- * @property {Number}    index        - Position der Genre innerhalb der Gruppenliste
+ * @property {Number}    index        - Position der Genres innerhalb der Gruppenliste
  * @property {String}    name         - Name der Genre
- * @property {Lied[]} artikelListe - Liste der Lied in dieser Genre
+ * @property {Lied[]} artikelListe - Liste der Lieder in diesem Genre
  */
 class Genre {
   static counter = 1
   id
   index
   name
-  artikelListe
+  liedListe
 
   constructor (name, index) {
     this.id = Genre.counter++
     this.name = name
     this.index = index
-    this.artikelListe = []
+    this.liedListe = []
   }
 
   /**
-   * Sucht einen Lied anhand seines Namens
+   * Sucht ein Lied anhand seines Namens
    * @param {String} suchName - Name des gesuchten Artikels
    * @param {Boolean} meldungAusgeben - steuert, ob eine Meldung ausgegeben wird
-   * @returns {Lied|null} artikel - der gefundene Lied bzw. `null`, wenn nichts gefunden wurde
+   * @returns {Lied|null} lied - das gefundene Lied bzw. `null`, wenn nichts gefunden wurde
    */
-  artikelFinden (suchName, meldungAusgeben) {
-    for (let artikel of this.artikelListe) {
-      if (artikel.name === suchName) {
-        return artikel
+  liedFinden (suchName, meldungAusgeben = true) {
+    for (let lied of this.liedListe) {
+      if (lied.name === suchName) {
+        return lied
       }
     }
     if (meldungAusgeben) {
@@ -43,29 +43,35 @@ class Genre {
   }
 
   /**
-   * Listet die Lied in dieser Genre in der Konsole auf
+   *
+   * Listet die Lieder in diesem Genre in der Konsole auf
+   * Nur zum Debugging
+   *
    * @param {Boolean} gekauft - steuert die Anzeige der gekauften oder noch zu kaufenden Lied
    */
+
+  /*
   artikelAuflisten (gekauft) {
-    for (let artikel of this.artikelListe) {
+    for (let artikel of this.liedListe) {
       if (artikel.gekauft === gekauft) {
         console.debug("  " + artikel.name)
       }
     }
   }
+  */
 
   /**
-   * Fügt einen Lied zur ArtikelListe hinzu und gibt diesen als Wert zurück
-   * @param {String} name - Name des neuen Artikels
-   * @returns {Lied} neuerArtikel - der neu erzeugte Lied
+   * Fügt ein Lied zur Liederliste hinzu und gibt dieses als Wert zurück
+   * @param {String} name - Name des neuen Lieds
+   * @returns {Lied} neuesLied - das neu erzeugte Lied
    */
-  artikelHinzufuegen (name) {
-    let vorhandenerArtikel = this.artikelFinden(name, false)
-    if (!vorhandenerArtikel) {
-      let neuerArtikel = new Lied(name, this.artikelListe.length)
-      this.artikelListe.push(neuerArtikel)
+  liedHinzufuegen (name) {
+    let vorhandenesLied = this.liedFinden(name, false)
+    if (!vorhandenesLied) {
+      let neuesLied = new Lied(name, this.liedListe.length)
+      this.liedListe.push(neuesLied)
       Modell.informieren("[" + this.name + "] Lied " + name + " hinzugefügt")
-      return neuerArtikel
+      return neuesLied
     } else {
       Modell.informieren("[" + this.name + "] Lied " + name + " existiert schon!", true)
     }
@@ -77,7 +83,7 @@ class Genre {
    * @param {object} artikel - das übergebene JSON-Objekt
    */
   artikelObjektHinzufuegen (artikel) {
-    let neuerArtikel = this.artikelHinzufuegen(artikel.name)
+    let neuerArtikel = this.liedHinzufuegen(artikel.name)
     // kopiert alle Properties aus "artikel" nach "neuerArtikel"
     Object.assign(neuerArtikel, artikel)
   }
@@ -87,16 +93,14 @@ class Genre {
    * @param {String} name - Index des zu entfernenden Artikels
    */
   artikelEntfernen (name) {
-    let loeschArtikel = this.artikelFinden(name)
+    let loeschArtikel = this.liedFinden(name)
     if (loeschArtikel) {
-      const index = this.artikelListe.indexOf(loeschArtikel)
-      this.artikelListe.splice(index, 1)
+      const index = this.liedListe.indexOf(loeschArtikel)
+      this.liedListe.splice(index, 1)
       this.artikelNeuNummerieren()
-      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" entfernt"
-      )
+      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" entfernt")
     } else {
-      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" konnte NICHT entfernt werden", true
-      )
+      Modell.informieren("[" + this.name + "] Lied \"" + name + "\" konnte NICHT entfernt werden", true)
     }
   }
 
@@ -104,8 +108,8 @@ class Genre {
    * Nummeriert alle Lied in der Lied-Liste neu durch
    */
   artikelNeuNummerieren () {
-    for (let i = 0; i < this.artikelListe.length; i++) {
-      this.artikelListe[i].index = i
+    for (let i = 0; i < this.liedListe.length; i++) {
+      this.liedListe[i].index = i
     }
   }
 
@@ -115,7 +119,7 @@ class Genre {
    * @param {String} neuerName - neuer Name des Artikels
    */
   artikelUmbenennen (alterName, neuerName) {
-    let vorhandenerArtikel = this.artikelFinden(alterName)
+    let vorhandenerArtikel = this.liedFinden(alterName)
     if (vorhandenerArtikel) {
       vorhandenerArtikel.name = neuerName
     }

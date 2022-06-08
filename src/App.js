@@ -72,7 +72,7 @@ class App extends React.Component {
     const eingabe = document.getElementById("artikelEingabe")
     const artikelName = eingabe.value.trim()
     if (artikelName.length > 0) {
-      Modell.aktiveGruppe.artikelHinzufuegen(artikelName)
+      Modell.aktiveGruppe.liedHinzufuegen(artikelName)
       this.setState(this.state)
     }
     eingabe.value = ""

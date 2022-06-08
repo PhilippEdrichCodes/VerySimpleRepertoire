@@ -55,7 +55,7 @@ class GruppenTag extends React.Component {
 
     let artikelArray = []
     if (this.state.aufgeklappt) {
-      for (const artikel of gruppe.artikelListe) {
+      for (const artikel of gruppe.liedListe) {
         if (artikel.gekauft === this.props.gekauft) {
           artikelArray.push(
             <ArtikelTag artikel={artikel} key={artikel.id}
