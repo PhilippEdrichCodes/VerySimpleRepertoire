@@ -39,6 +39,15 @@ class GenreDialog extends React.Component {
     this.setState({gruppenListe: Modell.genreListe})
   }
 
+  demoDatenLaden () {
+    let parodie = Modell.genreHinzufuegen("Parodie")
+    Modell.setAktivesGenre(parodie)
+    Modell.genreHinzufuegen("Latin")
+    Modell.genreHinzufuegen("Schlager")
+    Modell.genreHinzufuegen("Pop")
+
+  }
+
   render () {
     const genreListe = []
     for (let genre of this.state.genreListe) {

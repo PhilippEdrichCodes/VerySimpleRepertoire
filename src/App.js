@@ -16,7 +16,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       aktivesGenre: null,
-      showGruppenDialog: false,
+      showGenreDialog: false,
       showSortierenDialog: false,
       imSetAufgeklappt: true,
       geprobtAufgeklappt: false
@@ -29,7 +29,7 @@ class App extends React.Component {
    * und stellt den Anzeigezustand wieder her
    */
   componentDidMount () {
-    Modell.laden()
+    Modell.laden() // ? this.setState({showGenreDialog: false}) : this.setState({showGenreDialog: true})
     // Auf-/Zu-Klapp-Zustand aus dem LocalStorage laden
     let imSetIstAufgeklappt = localStorage.getItem("imSetAufgeklappt")
     imSetIstAufgeklappt = (imSetIstAufgeklappt == null) ? true : JSON.parse(imSetIstAufgeklappt)
@@ -136,14 +136,14 @@ class App extends React.Component {
     if (sortieren) {
       Modell.sortieren(reihenfolge)
     }
-    this.setState({showSortierDialog: false})
+    this.setState({showSortierenDialog: false})
   }
 
   render () {
-    let nochZuKaufen = []
+    let imSet = []
     if (this.state.imSetAufgeklappt === true) {
       for (const gruppe of Modell.genreListe) {
-        nochZuKaufen.push(
+        imSet.push(
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktivesGenre}
@@ -155,10 +155,10 @@ class App extends React.Component {
       }
     }
 
-    let schonGekauft = []
+    let geprobt = []
     if (this.state.geprobtAufgeklappt) {
       for (const gruppe of Modell.genreListe) {
-        schonGekauft.push(
+        geprobt.push(
           <GenreTag
             key={gruppe.id}
             aktiv={gruppe === this.state.aktivesGenre}
@@ -170,11 +170,11 @@ class App extends React.Component {
       }
     }
 
-    let gruppenDialog = ""
-    if (this.state.showGruppenDialog) {
-      gruppenDialog = <GenreDialog
+    let genreDialog = ""
+    if (this.state.showGenreDialog) {
+      genreDialog = <GenreDialog
         genreListe={Modell.genreListe}
-        onDialogClose={() => this.setState({showGruppenDialog: false})}/>
+        onDialogClose={() => this.setState({showGenreDialog: false})}/>
     }
 
     let sortierDialog = ""
@@ -211,7 +211,7 @@ class App extends React.Component {
               </i>
             </h2>
             <dl>
-              {nochZuKaufen}
+              {imSet}
             </dl>
           </section>
           <hr/>
@@ -222,7 +222,7 @@ class App extends React.Component {
               </i>
             </h2>
             <dl>
-              {schonGekauft}
+              {geprobt}
             </dl>
           </section>
         </main>
@@ -231,12 +231,12 @@ class App extends React.Component {
         <footer>
           <button id="genreButton"
                   className="mdc-button mdc-button--raised"
-                  onClick={() => this.setState({showGruppenDialog: true})}>
+                  onClick={() => this.setState({showGenreDialog: true})}>
             <span className="material-icons">bookmark_add</span>
             <span className="mdc-button__ripple"></span> Genre
           </button>
           <button id="sortButton" className="mdc-button mdc-button--raised"
-                  onClick={() => this.setState({showSortierDialog: true})}>
+                  onClick={() => this.setState({showSortierenDialog: true})}>
             <span className="material-icons">sort</span>
             <span className="mdc-button__ripple"></span> Sort
           </button>
@@ -247,7 +247,7 @@ class App extends React.Component {
           </button>
         </footer>
 
-        {gruppenDialog}
+        {genreDialog}
         {sortierDialog}
       </div>
     )
