@@ -40,12 +40,22 @@ class GenreDialog extends React.Component {
   }
 
   demoDatenLaden () {
+    let pop = Modell.genreHinzufuegen("Pop")
+    pop.liedHinzufuegen("Only You (Vincent Clarke)")
+    let disco = Modell.genreHinzufuegen("Disco")
+    disco.liedHinzufuegen("Super Trooper")
+    let latin = Modell.genreHinzufuegen("Latin")
+    latin.liedHinzufuegen("El Condor Pasa")
+    let sambalele = latin.liedHinzufuegen("Sambalele")
+    sambalele.geprobt = true
     let parodie = Modell.genreHinzufuegen("Parodie")
-    Modell.setAktivesGenre(parodie)
-    Modell.genreHinzufuegen("Latin")
-    Modell.genreHinzufuegen("Schlager")
-    Modell.genreHinzufuegen("Pop")
-
+    parodie.liedHinzufuegen("Skandal im Hexenwald (Otto)")
+    parodie.liedHinzufuegen("Hoch auf dem gelben Wagen (EAV)")
+    parodie.liedHinzufuegen("Im Vollrausch zu Berge (EAV)")
+    parodie.liedHinzufuegen("Major Hänsel (Otto)")
+    let schlager = Modell.genreHinzufuegen("Schlager")
+    let griechischerWein = schlager.liedHinzufuegen("Griechischer Wein")
+    griechischerWein.geprobt = true
   }
 
   render () {
