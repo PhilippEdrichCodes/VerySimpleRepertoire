@@ -101,6 +101,12 @@ class GenreDialog extends React.Component {
           <div className="mdc-dialog__actions">
             <button type="button"
                     className="mdc-button mdc-dialog__button"
+                    onClick={() => this.demoDatenLaden()}>
+              <div className="mdc-button__ripple"></div>
+              <span className="mdc-button__label">Demo</span>
+            </button>
+            <button type="button"
+                    className="mdc-button mdc-dialog__button"
                     onClick={this.props.onDialogClose}>
               <div className="mdc-button__ripple"></div>
               <span className="mdc-button__label">Schließen</span>

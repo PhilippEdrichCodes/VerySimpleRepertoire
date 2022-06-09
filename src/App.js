@@ -29,7 +29,7 @@ class App extends React.Component {
    * und stellt den Anzeigezustand wieder her
    */
   componentDidMount () {
-    Modell.laden() // ? this.setState({showGenreDialog: false}) : this.setState({showGenreDialog: true})
+    Modell.laden() ? this.setState({showGenreDialog: false}) : this.setState({showGenreDialog: true})
     // Auf-/Zu-Klapp-Zustand aus dem LocalStorage laden
     let imSetIstAufgeklappt = localStorage.getItem("imSetAufgeklappt")
     imSetIstAufgeklappt = (imSetIstAufgeklappt == null) ? true : JSON.parse(imSetIstAufgeklappt)
